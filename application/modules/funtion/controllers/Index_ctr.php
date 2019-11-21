@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Category_ctr extends CI_Controller {
+class Index_ctr extends CI_Controller {
 
 	public function __construct()
   	{
@@ -13,16 +13,15 @@ class Category_ctr extends CI_Controller {
 
 	public function index()
 	{
-		if ($this->session->userdata('username') != '')
-        {
-			//$data['category'] = $this->Category_model->category();
-			$this->load->view('option/header');
-      // $this->load->view('category',$data);
-      $this->load->view('category');
-			$this->load->view('option/footer');
-        }else{
-            $this->load->view('login');
-        }
+      if ($this->session->userdata('username') != ''){
+          $data['user'] = $this->db->get_where('tbl_users',['username' => $this->session->userdata('username')])->row();
+          $this->load->view('option/header'); 
+          $this->load->view('index', $data);
+          $this->load->view('option/footer');
+          
+      }else{
+          $this->load->view('login');
+      }
 		
 
 	}

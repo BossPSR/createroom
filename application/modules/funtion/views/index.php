@@ -8,7 +8,7 @@
                             <div class="btn-group pull-right">
                                 <button class="btn btn-success">สร้างห้องเรียน <i class="mdi mdi-book-open-page-variant"></i></button>
                             </div>
-                            <h4 class="page-title">Directory</h4>
+                            <h4 class="page-title"><?php echo $user->type == 'teacher' ? "ห้องเรียนทั้งหมด":"ห้องเรียนที่นักเรียนสามารถเข้าได้"; ?></h4>
                         </div>
                     </div>
                 </div>

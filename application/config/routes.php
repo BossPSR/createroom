@@ -3,7 +3,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 
 
-$route['default_controller'] = 'funtion/Home_ctr/Home';
+$route['default_controller'] = 'funtion/Index_ctr/index';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 
@@ -13,7 +13,8 @@ $route['Login'] = 'funtion/Login_ctr/login';
 $route['LoginMe'] = 'funtion/Login_ctr/loginMe';
 $route['LogOut'] = 'funtion/Login_ctr/logout';
 
-$route['index'] = 'funtion/Home_ctr/Home'; 
+$route['index'] = 'funtion/Index_ctr/index'; 
+
 $route['Category'] = 'funtion/Category_ctr';
 $route['Add_Category'] = 'funtion/Category_ctr/add_category';
 $route['Complete_Category'] = 'funtion/Category_ctr/add_category_com';

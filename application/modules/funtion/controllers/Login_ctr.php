@@ -14,7 +14,7 @@ class Login_ctr extends CI_Controller
     {
         if ($this->session->userdata('username') != '')
         {
-            redirect('Category');
+            redirect('index');
         }else{
             $this->load->view('login');
         }
