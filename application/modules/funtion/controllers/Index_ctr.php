@@ -7,7 +7,7 @@ class Index_ctr extends CI_Controller {
   	{
 		parent::__construct();
 		$this->load->model('Category_model');
-
+    $this->load->model('Room_model');
 		
 	}
 
@@ -15,6 +15,7 @@ class Index_ctr extends CI_Controller {
 	{
       if ($this->session->userdata('username') != ''){
           $data['user'] = $this->db->get_where('tbl_users',['username' => $this->session->userdata('username')])->row();
+          $data['rooms'] = $this->Room_model->teacherRoom();
           $this->load->view('option/header'); 
           $this->load->view('index', $data);
           $this->load->view('option/footer');
@@ -26,13 +27,13 @@ class Index_ctr extends CI_Controller {
 
 	}
 
-	public function add_category()
+	public function add_room()
 	{
 		if ($this->session->userdata('username') != '')
         {
 
 			$this->load->view('option/header');
-			$this->load->view('add_category');
+			$this->load->view('add_room');
 			$this->load->view('option/footer');
         }else{
             $this->load->view('login');
@@ -40,24 +41,30 @@ class Index_ctr extends CI_Controller {
 		
 
 	}
-	  public function add_category_com()
+	  public function add_room_process()
     {
-      $category        = $this->input->post('category');
-     
-
+      $teacher = $this->db->get_where('tbl_users',['username' => $this->session->userdata('username')])->row();
       $data = array(
-        'category'     => $category
-       
+        'room'        => $this->input->post('name_room'),
+        'sec'         => $this->input->post('sec'),
+        'subject'     => $this->input->post('subject'),
+        'teacher_id'  => $teacher->id,
+        'limit_room'  => $this->input->post('limit_room'),
+        'create_date' => date('Y-m-d'),
+        'created_at'  => date('Y-m-d H:i:s'),
+        'updated_at'  => date('Y-m-d H:i:s')
       );
-      $success = $this->db->insert('tbl_category',$data);
 
-      if($succeed > 0)
+      $success = $this->db->insert('tbl_rooms',$data);
+
+      if($success > 0)
       {
-        $this->session->set_flashdata('msg','เพิ่มหมวดหมู่งานไม่สำเร็จ กรุณาลองใหม่อีกครั้ง !!.');
+        $this->session->set_flashdata('response','สร้างห้องเรียนเรียบร้อยแล้ว');
       }else{
-        $this->session->set_flashdata('response','เพิ่มหมวดหมู่งานเรียบร้อยแล้ว');
+
+        $this->session->set_flashdata('msg','สร้างห้องเรียนไม่สำเร็จ กรุณาลองใหม่อีกครั้ง !!.');
       }
-        redirect('Category');
+        redirect('index');
     }
     public function Edit_category()
     {

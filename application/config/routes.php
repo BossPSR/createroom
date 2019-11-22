@@ -14,10 +14,10 @@ $route['LoginMe'] = 'funtion/Login_ctr/loginMe';
 $route['LogOut'] = 'funtion/Login_ctr/logout';
 
 $route['index'] = 'funtion/Index_ctr/index'; 
+$route['add_room'] = 'funtion/Index_ctr/add_room';
+$route['add_room_process'] = 'funtion/Index_ctr/add_room_process';
 
 $route['Category'] = 'funtion/Category_ctr';
-$route['Add_Category'] = 'funtion/Category_ctr/add_category';
-$route['Complete_Category'] = 'funtion/Category_ctr/add_category_com';
 $route['Edit_category'] = 'funtion/Category_ctr/Edit_category';
 $route['Edit_category_Complete'] = 'funtion/Category_ctr/Edit_category_Complete';
 $route['Category_delete'] = 'funtion/Category_ctr/category_delete';

@@ -6,7 +6,7 @@
                     <div class="col-sm-12">
                         <div class="page-title-box">
                             <div class="btn-group pull-right">
-                                <button class="btn btn-success">สร้างห้องเรียน <i class="mdi mdi-book-open-page-variant"></i></button>
+                                <a href="add_room"><button class="btn btn-success">สร้างห้องเรียน <i class="mdi mdi-book-open-page-variant"></i></button></a>
                             </div>
                             <h4 class="page-title"><?php echo $user->type == 'teacher' ? "ห้องเรียนทั้งหมด":"ห้องเรียนที่นักเรียนสามารถเข้าได้"; ?></h4>
                         </div>
@@ -14,117 +14,34 @@
                 </div>
                 <!-- end page title end breadcrumb -->
 
-                <div class="row">
-                    <div class="col-lg-4">
-                        <div class="card m-b-30">
-                            <div class="card-body">
-
-                                <div class="media">
-                                    <img class="d-flex mr-3 rounded-circle img-thumbnail thumb-lg" src="public/assets/images/users/avatar-2.jpg" alt="Generic placeholder image">
-                                    <div class="media-body">
-                                        <h5 class="mt-0 font-18 mb-1">Pauline I. Bird</h5>
-                                        <p class="text-muted font-14">Webdeveloper</p>
-
-                                        <ul class="social-links list-inline mb-0">
-                                            <li class="list-inline-item">
-                                                <a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="Facebook"><i class="fa fa-facebook"></i></a>
-                                            </li>
-                                            <li class="list-inline-item">
-                                                <a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="Twitter"><i class="fa fa-twitter"></i></a>
-                                            </li>
-                                            <li class="list-inline-item">
-                                                <a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="1234567890"><i class="fa fa-phone"></i></a>
-                                            </li>
-                                            <li class="list-inline-item">
-                                                <a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="@skypename"><i class="fa fa-skype"></i></a>
-                                            </li>
-                                        </ul>
-
-                                    </div>
-                                </div>
-
-                            </div>
+               <!-- flashdata start-->
+                    <?php if($success = $this->session->flashdata('response')):?>
+                        <div class="alert alert-success alert-dismissable">
+                            <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+                                <?php echo $success; ?> <a class="alert-link" href="#"></a>.
                         </div>
-                    </div> <!-- end col -->
-
-                    <div class="col-lg-4">
-                        <div class="card m-b-30">
-                            <div class="card-body">
-
-                                <div class="media">
-                                    <img class="d-flex mr-3 rounded-circle img-thumbnail thumb-lg" src="public/assets/images/users/avatar-3.jpg" alt="Generic placeholder image">
-                                    <div class="media-body">
-                                        <h5 class="mt-0 font-18 mb-1">Ralph L. Alva</h5>
-                                        <p class="text-muted font-14">Webdeveloper</p>
-
-                                        <ul class="social-links list-inline mb-0">
-                                            <li class="list-inline-item">
-                                                <a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="Facebook"><i class="fa fa-facebook"></i></a>
-                                            </li>
-                                            <li class="list-inline-item">
-                                                <a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="Twitter"><i class="fa fa-twitter"></i></a>
-                                            </li>
-                                            <li class="list-inline-item">
-                                                <a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="1234567890"><i class="fa fa-phone"></i></a>
-                                            </li>
-                                            <li class="list-inline-item">
-                                                <a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="@skypename"><i class="fa fa-skype"></i></a>
-                                            </li>
-                                        </ul>
-
-                                    </div>
-                                </div>
-
-                            </div>
+                                <?php elseif($error = $this->session->flashdata('msg')):?>
+                        <div class="alert alert-danger alert-dismissable">
+                            <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+                                <?php echo $error; ?> <a class="alert-link" href="#"></a>.
                         </div>
-                    </div> <!-- end col -->
-
-                    <div class="col-lg-4">
-                        <div class="card m-b-30">
-                            <div class="card-body">
-
-                                <div class="media">
-                                    <img class="d-flex mr-3 rounded-circle img-thumbnail thumb-lg" src="public/assets/images/users/avatar-4.jpg" alt="Generic placeholder image">
-                                    <div class="media-body">
-                                        <h5 class="mt-0 font-18 mb-1">John B. Roman</h5>
-                                        <p class="text-muted font-14">Webdeveloper</p>
-
-                                        <ul class="social-links list-inline mb-0">
-                                            <li class="list-inline-item">
-                                                <a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="Facebook"><i class="fa fa-facebook"></i></a>
-                                            </li>
-                                            <li class="list-inline-item">
-                                                <a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="Twitter"><i class="fa fa-twitter"></i></a>
-                                            </li>
-                                            <li class="list-inline-item">
-                                                <a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="1234567890"><i class="fa fa-phone"></i></a>
-                                            </li>
-                                            <li class="list-inline-item">
-                                                <a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="@skypename"><i class="fa fa-skype"></i></a>
-                                            </li>
-                                        </ul>
-
-                                    </div>
-                                </div>
-
-                            </div>
-                        </div>
-                    </div> <!-- end col -->
-                </div> <!-- end row -->
-
+                    <?php endif; ?>
+                            
+                <!-- flashdata end-->
 
                 <div class="row">
+                <?php print_r($rooms['tbl'][1]);exit(); ?>
+                   <?php foreach ($rooms as $room) { ?>
                     <div class="col-lg-4">
                         <div class="card m-b-30">
                             <div class="card-body">
-
                                 <div class="media">
                                     <img class="d-flex mr-3 rounded-circle img-thumbnail thumb-lg" src="public/assets/images/users/avatar-5.jpg" alt="Generic placeholder image">
                                     <div class="media-body">
-                                        <h5 class="mt-0 font-18 mb-1">James M. Caviness</h5>
-                                        <p class="text-muted font-14">Webdeveloper</p>
+                                        <h5 class="mt-0 font-18 mb-1"><?php echo $room['room']; ?></h5>
+                                        <p class="text-muted font-14"><?php echo $room['title'].$room['first_name'].' '.$room['last_name']; ?></p>
 
-                                        <ul class="social-links list-inline mb-0">
+                                        <!-- <ul class="social-links list-inline mb-0">
                                             <li class="list-inline-item">
                                                 <a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="Facebook"><i class="fa fa-facebook"></i></a>
                                             </li>
@@ -137,177 +54,14 @@
                                             <li class="list-inline-item">
                                                 <a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="@skypename"><i class="fa fa-skype"></i></a>
                                             </li>
-                                        </ul>
+                                        </ul> -->
 
                                     </div>
                                 </div>
-
                             </div>
                         </div>
                     </div> <!-- end col -->
-
-                    <div class="col-lg-4">
-                        <div class="card m-b-30">
-                            <div class="card-body">
-
-                                <div class="media">
-                                    <img class="d-flex mr-3 rounded-circle img-thumbnail thumb-lg" src="public/assets/images/users/avatar-6.jpg" alt="Generic placeholder image">
-                                    <div class="media-body">
-                                        <h5 class="mt-0 font-18 mb-1">Peter F. Costanzo</h5>
-                                        <p class="text-muted font-14">Webdeveloper</p>
-
-                                        <ul class="social-links list-inline mb-0">
-                                            <li class="list-inline-item">
-                                                <a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="Facebook"><i class="fa fa-facebook"></i></a>
-                                            </li>
-                                            <li class="list-inline-item">
-                                                <a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="Twitter"><i class="fa fa-twitter"></i></a>
-                                            </li>
-                                            <li class="list-inline-item">
-                                                <a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="1234567890"><i class="fa fa-phone"></i></a>
-                                            </li>
-                                            <li class="list-inline-item">
-                                                <a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="@skypename"><i class="fa fa-skype"></i></a>
-                                            </li>
-                                        </ul>
-
-                                    </div>
-                                </div>
-
-                            </div>
-                        </div>
-                    </div> <!-- end col -->
-
-                    <div class="col-lg-4">
-                        <div class="card m-b-30">
-                            <div class="card-body">
-
-                                <div class="media">
-                                    <img class="d-flex mr-3 rounded-circle img-thumbnail thumb-lg" src="public/assets/images/users/avatar-1.jpg" alt="Generic placeholder image">
-                                    <div class="media-body">
-                                        <h5 class="mt-0 font-18 mb-1">Lewis S. Cruz</h5>
-                                        <p class="text-muted font-14">Webdeveloper</p>
-
-                                        <ul class="social-links list-inline mb-0">
-                                            <li class="list-inline-item">
-                                                <a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="Facebook"><i class="fa fa-facebook"></i></a>
-                                            </li>
-                                            <li class="list-inline-item">
-                                                <a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="Twitter"><i class="fa fa-twitter"></i></a>
-                                            </li>
-                                            <li class="list-inline-item">
-                                                <a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="1234567890"><i class="fa fa-phone"></i></a>
-                                            </li>
-                                            <li class="list-inline-item">
-                                                <a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="@skypename"><i class="fa fa-skype"></i></a>
-                                            </li>
-                                        </ul>
-
-                                    </div>
-                                </div>
-
-                            </div>
-                        </div>
-                    </div> <!-- end col -->
-                </div> <!-- end row -->
-
-
-                <div class="row">
-                    <div class="col-lg-4">
-                        <div class="card m-b-30">
-                            <div class="card-body">
-
-                                <div class="media">
-                                    <img class="d-flex mr-3 rounded-circle img-thumbnail thumb-lg" src="public/assets/images/users/avatar-3.jpg" alt="Generic placeholder image">
-                                    <div class="media-body">
-                                        <h5 class="mt-0 font-18 mb-1">Thomas C. Wheeler</h5>
-                                        <p class="text-muted font-14">Webdeveloper</p>
-
-                                        <ul class="social-links list-inline mb-0">
-                                            <li class="list-inline-item">
-                                                <a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="Facebook"><i class="fa fa-facebook"></i></a>
-                                            </li>
-                                            <li class="list-inline-item">
-                                                <a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="Twitter"><i class="fa fa-twitter"></i></a>
-                                            </li>
-                                            <li class="list-inline-item">
-                                                <a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="1234567890"><i class="fa fa-phone"></i></a>
-                                            </li>
-                                            <li class="list-inline-item">
-                                                <a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="@skypename"><i class="fa fa-skype"></i></a>
-                                            </li>
-                                        </ul>
-
-                                    </div>
-                                </div>
-
-                            </div>
-                        </div>
-                    </div> <!-- end col -->
-
-                    <div class="col-lg-4">
-                        <div class="card m-b-30">
-                            <div class="card-body">
-
-                                <div class="media">
-                                    <img class="d-flex mr-3 rounded-circle img-thumbnail thumb-lg" src="public/assets/images/users/avatar-4.jpg" alt="Generic placeholder image">
-                                    <div class="media-body">
-                                        <h5 class="mt-0 font-18 mb-1">David O. Buckley</h5>
-                                        <p class="text-muted font-14">Webdeveloper</p>
-
-                                        <ul class="social-links list-inline mb-0">
-                                            <li class="list-inline-item">
-                                                <a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="Facebook"><i class="fa fa-facebook"></i></a>
-                                            </li>
-                                            <li class="list-inline-item">
-                                                <a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="Twitter"><i class="fa fa-twitter"></i></a>
-                                            </li>
-                                            <li class="list-inline-item">
-                                                <a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="1234567890"><i class="fa fa-phone"></i></a>
-                                            </li>
-                                            <li class="list-inline-item">
-                                                <a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="@skypename"><i class="fa fa-skype"></i></a>
-                                            </li>
-                                        </ul>
-
-                                    </div>
-                                </div>
-
-                            </div>
-                        </div>
-                    </div> <!-- end col -->
-
-                    <div class="col-lg-4">
-                        <div class="card m-b-30">
-                            <div class="card-body">
-
-                                <div class="media">
-                                    <img class="d-flex mr-3 rounded-circle img-thumbnail thumb-lg" src="public/assets/images/users/avatar-5.jpg" alt="Generic placeholder image">
-                                    <div class="media-body">
-                                        <h5 class="mt-0 font-18 mb-1">Johnny W. Seitz</h5>
-                                        <p class="text-muted font-14">Webdeveloper</p>
-
-                                        <ul class="social-links list-inline mb-0">
-                                            <li class="list-inline-item">
-                                                <a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="Facebook"><i class="fa fa-facebook"></i></a>
-                                            </li>
-                                            <li class="list-inline-item">
-                                                <a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="Twitter"><i class="fa fa-twitter"></i></a>
-                                            </li>
-                                            <li class="list-inline-item">
-                                                <a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="1234567890"><i class="fa fa-phone"></i></a>
-                                            </li>
-                                            <li class="list-inline-item">
-                                                <a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="@skypename"><i class="fa fa-skype"></i></a>
-                                            </li>
-                                        </ul>
-
-                                    </div>
-                                </div>
-
-                            </div>
-                        </div>
-                    </div> <!-- end col -->
+                   <?php } ?>
                 </div> <!-- end row -->
 
             </div> <!-- end container -->
