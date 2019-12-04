@@ -9,7 +9,17 @@ class Index_ctr extends CI_Controller {
 		$this->load->model('Category_model');
     $this->load->model('Room_model');
 		
-	}
+  }
+  
+  function generateRandomString($length = 7) {
+    $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    $charactersLength = strlen($characters);
+    $randomString = '';
+    for ($i = 0; $i < $length; $i++) {
+        $randomString .= $characters[rand(0, $charactersLength - 1)];
+    }
+    return $randomString;
+}
 
 	public function index()
 	{
@@ -43,37 +53,44 @@ class Index_ctr extends CI_Controller {
 	}
 	  public function add_room_process()
     {
-      $teacher = $this->db->get_where('tbl_users',['username' => $this->session->userdata('username')])->row();
-      $data = array(
-        'room'        => $this->input->post('name_room'),
-        'sec'         => $this->input->post('sec'),
-        'subject'     => $this->input->post('subject'),
-        'teacher_id'  => $teacher->id,
-        'limit_room'  => $this->input->post('limit_room'),
-        'create_date' => date('Y-m-d'),
-        'created_at'  => date('Y-m-d H:i:s'),
-        'updated_at'  => date('Y-m-d H:i:s')
-      );
-
-      $success = $this->db->insert('tbl_rooms',$data);
-
-      if($success > 0)
+      if ($this->session->userdata('username') != '')
       {
-        $this->session->set_flashdata('response','สร้างห้องเรียนเรียบร้อยแล้ว');
-      }else{
+        $teacher = $this->db->get_where('tbl_users',['username' => $this->session->userdata('username')])->row();
+        $data = array(
+          'room'        => $this->input->post('name_room'),
+          'sec'         => $this->input->post('sec'),
+          'subject'     => $this->input->post('subject'),
+          'teacher_id'  => $teacher->id,
+          'limit_room'  => $this->input->post('limit_room'),
+          'generate'    => $this->generateRandomString(),
+          'create_date' => date('Y-m-d'),
+          'created_at'  => date('Y-m-d H:i:s'),
+          'updated_at'  => date('Y-m-d H:i:s')
+        );
 
-        $this->session->set_flashdata('msg','สร้างห้องเรียนไม่สำเร็จ กรุณาลองใหม่อีกครั้ง !!.');
+        $success = $this->db->insert('tbl_rooms',$data);
+
+        if($success > 0)
+        {
+          $this->session->set_flashdata('response','สร้างห้องเรียนเรียบร้อยแล้ว');
+        }else{
+
+          $this->session->set_flashdata('msg','สร้างห้องเรียนไม่สำเร็จ กรุณาลองใหม่อีกครั้ง !!.');
+        }
+          redirect('index');
+      }else{
+          $this->load->view('login');
       }
-        redirect('index');
     }
-    public function Edit_category()
+
+    public function detail_room()
     {
       if ($this->session->userdata('username') != '')
           {
-  
-        $this->load->view('option/header');
-        $this->load->view('edit_category');
-        $this->load->view('option/footer');
+            $data['room'] = $this->db->get_where('tbl_rooms',['id',$this->input->get('id')])->row();
+            $this->load->view('option/header');
+            $this->load->view('detail_room',$data);
+            $this->load->view('option/footer');
           }else{
               $this->load->view('login');
           }
@@ -81,51 +98,49 @@ class Index_ctr extends CI_Controller {
   
     }
 
-	  public function Edit_category_Complete()
+    public function edit_room()
     {
-      $id        = $this->input->post('id');
-      $category        = $this->input->post('category');
-     
-
-      $data = array(
-        'category'     => $category
-      
-      );		
-      		     $this->db->where('id',$id);
-      $success = $this->db->update('tbl_category',$data);
-
-      if($succeed > 0)
-      {
-        $this->session->set_flashdata('msg','แก้ไขหมวดหมู่งานไม่สำเร็จ กรุณาลองใหม่อีกครั้ง !!.');
-      }else{
-        $this->session->set_flashdata('response','แก้ไขหมวดหมู่งานเรียบร้อยแล้ว');
-      }
-        redirect('Category');
-
-}
-
- public function category_delete()
-    {
-      $id = $this->input->get('id');
-
-      if ($this->Category_model->category_delete($id))
-      {
-        echo "<script language=\"JavaScript\">";
-			  echo "alert('ลบข้อมูลสำเร็จ !!');window.location='Category';";
-			  echo "</script>";
-      }
-      else
-      {
-        echo "<script language=\"JavaScript\">";
-			  echo "alert('ไม่สามารถลบข้อมูลได้ !!');window.location='Category';";
-			  echo "</script>";
-      }
-        return redirect('Category');
+      if ($this->session->userdata('username') != '')
+          {
+              $data['room'] = $this->db->get_where('tbl_rooms',['id'=> $this->input->get('id')])->row();             
+              $this->load->view('option/header');
+              $this->load->view('edit_room',$data);
+              $this->load->view('option/footer');
+          }else{
+              $this->load->view('login');
+          }
     }
 
+    public function edit_room_process()
+    {
+      if ($this->session->userdata('username') != '')
+      {
+        $teacher = $this->db->get_where('tbl_users',['username' => $this->session->userdata('username')])->row();
+        $data = array(
+          'room'        => $this->input->post('name_room'),
+          'sec'         => $this->input->post('sec'),
+          'subject'     => $this->input->post('subject'),
+          'teacher_id'  => $teacher->id,
+          'limit_room'  => $this->input->post('limit_room'),
+          'generate'    => $this->generateRandomString(),
+          'updated_at'  => date('Y-m-d H:i:s')
+        );
+        $this->db->where('id',$this->input->post('id'));
+        $success = $this->db->update('tbl_rooms',$data);
 
+        if($success > 0)
+        {
+          $this->session->set_flashdata('response','สร้างห้องเรียนเรียบร้อยแล้ว');
+        }else{
 
+          $this->session->set_flashdata('msg','สร้างห้องเรียนไม่สำเร็จ กรุณาลองใหม่อีกครั้ง !!.');
+        }
+          redirect('index');
 
+      }else{
+        $this->load->view('login');
+      }
+    }
 
 
 }

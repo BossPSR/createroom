@@ -37,7 +37,7 @@ class Login_ctr extends CI_Controller
                     'username' => $username
                 );
                 $this->session->set_userdata($user_data);
-                redirect('Category');
+                redirect('Login');
             }
             else
             {

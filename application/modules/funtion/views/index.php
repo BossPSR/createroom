@@ -32,16 +32,28 @@
                 <div class="row">
                
                    <?php foreach ($rooms as $room) { ?>
+                   <?php $teacher = $this->db->get_where('tbl_users',['id' => $room['teacher_id']])->row();
+                         if (isset($teacher)) {
+                    ?>
                     <div class="col-lg-4">
                         <div class="card m-b-30">
                             <div class="card-body">
+
                                 <div class="media">
                                     <img class="d-flex mr-3 rounded-circle img-thumbnail thumb-lg" src="public/assets/images/users/avatar-5.jpg" alt="Generic placeholder image">
                                     <div class="media-body">
                                         <h5 class="mt-0 font-18 mb-1"><?php echo $room['room']; ?></h5>
-                                        <?php $teacher = $this->db->get_where('tbl_users',['id' => $room['teacher_id']])->row(); ?>
-                                        <p class="text-muted font-14"><?php echo $teacher->title.$teacher->first_name.' '.$teacher->last_name; ?></p>
-
+                                        
+                                            <p class="text-muted font-14"><?php echo $teacher->title.$teacher->first_name.' '.$teacher->last_name; ?></p>
+                                        
+                                        <div>
+                                            <a href="detail_room?id=<?php echo $room['id'];?>"><button type="button" class="btn btn-success">รายละเอียด</button></a>
+                                            <?php if ($room['teacher_id'] == $user->id) {?>
+                                            <a href="edit_room?id=<?php echo $room['id'];?>"><button type="button" class="btn btn-warning">แก้ไขห้องเรียน</button></a>
+                                            <div style=""><button type="button" class="btn btn-primary">รหัสเข้าห้องเรียน</button></div>
+                                            <?php } ?>
+                                        </div>
+                                        
                                         <!-- <ul class="social-links list-inline mb-0">
                                             <li class="list-inline-item">
                                                 <a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="Facebook"><i class="fa fa-facebook"></i></a>
@@ -55,13 +67,14 @@
                                             <li class="list-inline-item">
                                                 <a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="@skypename"><i class="fa fa-skype"></i></a>
                                             </li>
-                                        </ul> -->
+                                         -->
 
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div> <!-- end col -->
+                    <?php } ?>
                    <?php } ?>
                 </div> <!-- end row -->
 
