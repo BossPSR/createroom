@@ -30,7 +30,7 @@
                 <!-- flashdata end-->
 
                 <div class="row">
-                <?php print_r($rooms['tbl'][1]);exit(); ?>
+               
                    <?php foreach ($rooms as $room) { ?>
                     <div class="col-lg-4">
                         <div class="card m-b-30">
@@ -39,7 +39,8 @@
                                     <img class="d-flex mr-3 rounded-circle img-thumbnail thumb-lg" src="public/assets/images/users/avatar-5.jpg" alt="Generic placeholder image">
                                     <div class="media-body">
                                         <h5 class="mt-0 font-18 mb-1"><?php echo $room['room']; ?></h5>
-                                        <p class="text-muted font-14"><?php echo $room['title'].$room['first_name'].' '.$room['last_name']; ?></p>
+                                        <?php $teacher = $this->db->get_where('tbl_users',['id' => $room['teacher_id']])->row(); ?>
+                                        <p class="text-muted font-14"><?php echo $teacher->title.$teacher->first_name.' '.$teacher->last_name; ?></p>
 
                                         <!-- <ul class="social-links list-inline mb-0">
                                             <li class="list-inline-item">

@@ -15,7 +15,7 @@ class Index_ctr extends CI_Controller {
 	{
       if ($this->session->userdata('username') != ''){
           $data['user'] = $this->db->get_where('tbl_users',['username' => $this->session->userdata('username')])->row();
-          $data['rooms'] = $this->Room_model->teacherRoom();
+          $data['rooms'] = $this->db->get('tbl_rooms')->result_array();
           $this->load->view('option/header'); 
           $this->load->view('index', $data);
           $this->load->view('option/footer');
