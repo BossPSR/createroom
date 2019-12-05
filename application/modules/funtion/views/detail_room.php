@@ -74,7 +74,18 @@
                                             </div>
                                              
 
-                                    <?php } ?>      
+                                    <?php } ?> 
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="p-20">
+                                                            <?php if(isset($type) && $type == "teacher"){ ?>
+                                                                <a href="teacher_my_room"><button type="button" class="btn btn-danger">ย้อนกลับ</button></a>
+                                                            <?php }else{ ?>
+                                                                <a href="index"><button type="button" class="btn btn-danger">ย้อนกลับ</button></a>
+                                                            <?php } ?>
+                                                    </div>
+                                                </div>
+                                            </div>     
                                     </div>
                                 </div>
                                 </div> <!-- end col -->

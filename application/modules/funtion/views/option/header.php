@@ -98,7 +98,11 @@
                         <ul class="navigation-menu">
 
                             <li class="has-submenu">
-                                <a href="index"><i class="ti-home"></i>Dashboard</a>
+                                <a href="index"><i class="ti-home"></i>Room All</a>
+                            </li>
+
+                            <li class="has-submenu">
+                                <a href="teacher_my_room"><i class="ti-home"></i>My Room</a>
                             </li>
 
 

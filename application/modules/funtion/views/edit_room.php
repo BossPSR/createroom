@@ -35,6 +35,10 @@
                                 <form action="edit_room_process" method="post">      
                                 <input type="hidden" name="id" value="<?php echo $this->input->get('id'); ?>">
                                             <div class="row">
+                                            <?php if(isset($type)){ ?>
+                                                <input type="hidden" name="type" value="<?php echo $type; ?>">
+
+                                            <?php } ?>
 
                                                 <div class="col-md-12">
                                                     <div class="p-20">
@@ -75,7 +79,11 @@
                                                 <div class="col-md-12">
                                                     <div class="p-20">
                                                             <button type="submit" class="btn btn-success">แก้ไขข้อมูล</button>
-                                                            <a href="index"><button type="button" class="btn btn-danger">ย้อนกลับ</button></a>
+                                                            <?php if(isset($type) && $type == "teacher"){ ?>
+                                                                <a href="teacher_my_room"><button type="button" class="btn btn-danger">ย้อนกลับ</button></a>
+                                                            <?php }else{ ?>
+                                                                <a href="index"><button type="button" class="btn btn-danger">ย้อนกลับ</button></a>
+                                                            <?php } ?>
                                                     </div>
                                                 </div>
                                             </div>

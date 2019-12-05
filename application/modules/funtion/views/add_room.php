@@ -33,7 +33,10 @@
                                 <hr><br>
                                 <form action="add_room_process" method="post">      
                                             <div class="row">
+                                            <?php if(isset($type)){ ?>
+                                                <input type="hidden" name="type" value="<?php echo $type; ?>">
 
+                                            <?php } ?>
                                                 <div class="col-md-12">
                                                     <div class="p-20">
                                                         <div class="form-group">
@@ -73,7 +76,11 @@
                                                 <div class="col-md-12">
                                                     <div class="p-20">
                                                             <button type="submit" class="btn btn-success">บันทึกข้อมูล</button>
-                                                            <a href="index"><button type="button" class="btn btn-danger">ย้อนกลับ</button></a>
+                                                            <?php if(isset($type) && $type == "teacher"){ ?>
+                                                                <a href="teacher_my_room"><button type="button" class="btn btn-danger">ย้อนกลับ</button></a>
+                                                            <?php }else{ ?>
+                                                                <a href="index"><button type="button" class="btn btn-danger">ย้อนกลับ</button></a>
+                                                            <?php } ?>
                                                     </div>
                                                 </div>
                                             </div>
