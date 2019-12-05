@@ -40,19 +40,44 @@
                             <div class="card-body">
 
                                 <div class="media">
-                                    <img class="d-flex mr-3 rounded-circle img-thumbnail thumb-lg" src="public/assets/images/users/avatar-5.jpg" alt="Generic placeholder image">
+                                    <img class="d-flex mr-3 rounded-circle img-thumbnail thumb-lg" src="public/assets/images/room.jpg" alt="Generic placeholder image">
                                     <div class="media-body">
-                                        <h5 class="mt-0 font-18 mb-1"><?php echo $room['room']; ?></h5>
-                                        
-                                            <p class="text-muted font-14"><?php echo $teacher->title.$teacher->first_name.' '.$teacher->last_name; ?></p>
-                                        
+                                            <h5 class="mt-0 font-16 mb-1">ห้อง : <?php echo $room['room']; ?></h5>
+                                            <div class="font-16">วิชา : <?php echo $room['subject']; ?></div>
+                                            <div class="font-16">เซค : <?php echo $room['sec']; ?></div>
+                                            <div class="mt-0 font-16 mb-1">ผู้สอน : <?php echo $teacher->title.$teacher->first_name.' '.$teacher->last_name; ?></div>
+                                            
                                         <div>
-                                            <a href="detail_room?id=<?php echo $room['id'];?>"><button type="button" class="btn btn-success">รายละเอียด</button></a>
-                                            <?php if ($room['teacher_id'] == $user->id) {?>
-                                            <a href="edit_room?id=<?php echo $room['id'];?>"><button type="button" class="btn btn-warning">แก้ไขห้องเรียน</button></a>
-                                            <div style=""><button type="button" class="btn btn-primary">รหัสเข้าห้องเรียน</button></div>
+                                            <a href="detail_room?id=<?php echo $room['id'];?>"><button type="button" class="btn btn-success"><i class="fa fa-file-text" aria-hidden="true"></i></button></a>
+                                            <?php if ($room['teacher_id'] == $user->id) { ?>
+                                            <a href="edit_room?id=<?php echo $room['id'];?>"><button type="button" class="btn btn-warning"><i class="fa fa-pencil-square" aria-hidden="true"></i></button></a>
+                                            <a href="delete_room?id=<?php echo $room['id'];?>" onclick="return confirm('ท่านต้องการลบห้องเรียน ?')"><button type="button" class="btn btn-danger" onclick="myDelete()"><i class="fa fa-trash" aria-hidden="true"></i></button></a>
+                                            <div style="display:inline-block" data-toggle="modal" data-target="#exampleModal<?php echo $room['id'];?>"><button type="button" class="btn btn-primary"><i class="fa fa-key" aria-hidden="true"></i></button></div>
+                                            <a href="file_teacher?id=<?php echo $room['id'];?>"><button type="button" class="btn btn-info"><i class="fa fa-file-archive-o" aria-hidden="true"></i></button></a>
+
+                                            <!-- Modal -->
+                                                <div class="modal fade" id="exampleModal<?php echo $room['id'];?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog" role="document">
+                                                    <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h6 class="modal-title" id="exampleModalLabel">รหัสเข้าห้องเรียน (เพื่อให้นักเรียนสามารถเข้ามาเรียนได้)</h6>
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                       <div style="font-size:16px;">รหัสเข้าห้องเรียน : <?php echo $room['generate'];?></div>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        
+                                                    </div>
+                                                    </div>
+                                                </div>
+                                                </div>
                                             <?php } ?>
                                         </div>
+
+
                                         
                                         <!-- <ul class="social-links list-inline mb-0">
                                             <li class="list-inline-item">

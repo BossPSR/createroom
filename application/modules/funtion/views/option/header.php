@@ -37,7 +37,7 @@
                         <!--Upcube-->
                         <!--</a>-->
                         <!-- Image Logo -->
-                        <a href="index.html" class="logo">
+                        <a href="index" class="logo">
                             <img src="public/assets/images/logo-sm.png" alt="" height="22" class="logo-small">
                             <img src="public/assets/images/logo.png" alt="" height="24" class="logo-large">
                         </a>
@@ -65,7 +65,7 @@
                                     <a class="dropdown-item" href="#"><span class="badge badge-success pull-right m-t-5">5</span><i class="dripicons-gear text-muted"></i> Settings</a>
                                     <a class="dropdown-item" href="#"><i class="dripicons-lock text-muted"></i> Lock screen</a>
                                     <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="#"><i class="dripicons-exit text-muted"></i> Logout</a>
+                                    <a class="dropdown-item" href="LogOut"><i class="dripicons-exit text-muted"></i> Logout</a>
                                 </div>
                             </li>
                             <li class="menu-item list-inline-item">
@@ -98,7 +98,7 @@
                         <ul class="navigation-menu">
 
                             <li class="has-submenu">
-                                <a href="index.html"><i class="ti-home"></i>Dashboard</a>
+                                <a href="index"><i class="ti-home"></i>Dashboard</a>
                             </li>
 
 

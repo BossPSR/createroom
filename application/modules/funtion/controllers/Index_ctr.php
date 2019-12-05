@@ -25,7 +25,7 @@ class Index_ctr extends CI_Controller {
 	{
       if ($this->session->userdata('username') != ''){
           $data['user'] = $this->db->get_where('tbl_users',['username' => $this->session->userdata('username')])->row();
-          $data['rooms'] = $this->db->get('tbl_rooms')->result_array();
+          $data['rooms'] = $this->db->order_by('id', 'DESC')->get('tbl_rooms')->result_array();
           $this->load->view('option/header'); 
           $this->load->view('index', $data);
           $this->load->view('option/footer');
@@ -87,7 +87,7 @@ class Index_ctr extends CI_Controller {
     {
       if ($this->session->userdata('username') != '')
           {
-            $data['room'] = $this->db->get_where('tbl_rooms',['id',$this->input->get('id')])->row();
+            $data['room'] = $this->db->get_where('tbl_rooms',['id'=>$this->input->get('id')])->row();
             $this->load->view('option/header');
             $this->load->view('detail_room',$data);
             $this->load->view('option/footer');
@@ -102,7 +102,8 @@ class Index_ctr extends CI_Controller {
     {
       if ($this->session->userdata('username') != '')
           {
-              $data['room'] = $this->db->get_where('tbl_rooms',['id'=> $this->input->get('id')])->row();             
+              $teacher = $this->db->get_where('tbl_users',['username' => $this->session->userdata('username')])->row();
+              $data['room'] = $this->db->get_where('tbl_rooms',['id'=> $this->input->get('id'),'teacher_id'=>$teacher->id])->row();
               $this->load->view('option/header');
               $this->load->view('edit_room',$data);
               $this->load->view('option/footer');
@@ -116,6 +117,12 @@ class Index_ctr extends CI_Controller {
       if ($this->session->userdata('username') != '')
       {
         $teacher = $this->db->get_where('tbl_users',['username' => $this->session->userdata('username')])->row();
+        $room = $this->db->get_where('tbl_rooms',['id'=> $this->input->post('id'),'teacher_id' => $teacher->id])->row();
+
+        if (empty($room)) {
+            redirect('index');
+        }
+
         $data = array(
           'room'        => $this->input->post('name_room'),
           'sec'         => $this->input->post('sec'),
@@ -130,10 +137,10 @@ class Index_ctr extends CI_Controller {
 
         if($success > 0)
         {
-          $this->session->set_flashdata('response','สร้างห้องเรียนเรียบร้อยแล้ว');
+          $this->session->set_flashdata('response','แก้ไขห้องเรียนเรียบร้อยแล้ว');
         }else{
 
-          $this->session->set_flashdata('msg','สร้างห้องเรียนไม่สำเร็จ กรุณาลองใหม่อีกครั้ง !!.');
+          $this->session->set_flashdata('msg','แก้ไขห้องเรียนไม่สำเร็จ กรุณาลองใหม่อีกครั้ง !!.');
         }
           redirect('index');
 
@@ -142,5 +149,140 @@ class Index_ctr extends CI_Controller {
       }
     }
 
+    public function delete_room()
+    {
+      if ($this->session->userdata('username') != '')
+      {
+        $teacher = $this->db->get_where('tbl_users',['username' => $this->session->userdata('username')])->row();
+        $room = $this->db->get_where('tbl_rooms',['id'=> $this->input->get('id'),'teacher_id' => $teacher->id])->row();
+
+        if (empty($room)) {
+            redirect('index');
+        }
+
+        $this->db->where('id',$this->input->get('id'));
+        $success = $this->db->delete('tbl_rooms');
+
+        if($success > 0)
+        {
+          $this->session->set_flashdata('response','ลบห้องเรียนเรียบร้อยแล้ว');
+        }else{
+
+          $this->session->set_flashdata('msg','ลบห้องเรียนไม่สำเร็จ กรุณาลองใหม่อีกครั้ง !!.');
+        }
+          redirect('index');
+
+      }else{
+        $this->load->view('login');
+      }
+    }
+
+    public function file_teacher()
+    {
+      if ($this->session->userdata('username') != '')
+      {
+        $teacher = $this->db->get_where('tbl_users',['username' => $this->session->userdata('username')])->row();
+        $room = $this->db->get_where('tbl_rooms',['id'=> $this->input->get('id'),'teacher_id' => $teacher->id])->row_array();
+        if (empty($room)) {
+          redirect('index');
+        }
+        $file = $this->db->get_where('tbl_file_teacher',['room_id' => $room['id']])->result_array();
+
+        $data['room'] = $room;
+        $data['file'] = $file;
+
+        $this->load->view('option/header');
+        $this->load->view('file_teacher',$data);
+        $this->load->view('option/footer');
+
+       
+
+      }else{
+        $this->load->view('login');
+      }
+    }
+
+    public function file_teacher_process()
+    {
+      if ($this->session->userdata('username') != '')
+      {
+        $teacher = $this->db->get_where('tbl_users',['username' => $this->session->userdata('username')])->row();
+        $room = $this->db->get_where('tbl_rooms',['id'=> $this->input->post('room_id'),'teacher_id' => $teacher->id])->row();
+
+        if (empty($room)) {
+            redirect('index');
+        }
+
+        $this->load->library('upload');
+        $path = 'uploads/file/teacher/'.$teacher->id.'/'.strtotime(date('Y-m-d H:i:s'));
+        $config['upload_path'] = $path;
+        $config['allowed_types'] = '*';
+        $config['max_size']     = '200480';
+        $config['max_width'] = '50000';
+        $config['max_height'] = '50000';
+
+        if(!is_dir($config['upload_path']))
+			  {
+   				mkdir($config['upload_path'],0777,true);
+        }
+      
+        $this->upload->initialize($config);
+          if ($_FILES['file_name']['name']) {
+            if ($this->upload->do_upload('file_name')) {
+                $gamber     = $this->upload->data();
+                $data = array(
+                  'file_name'   => $gamber['file_name'],
+                  'path'        => $path,
+                  'room_id'     => $this->input->post('room_id'),
+                  'description'     => $this->input->post('description'),
+                  'create_date' => date('Y-m-d'),
+                  'created_at'  => date('Y-m-d H:i:s'),
+                  'updated_at'  => date('Y-m-d H:i:s')
+                );
+                $success = $this->db->insert('tbl_file_teacher',$data);
+            }
+          }
+
+          
+
+        
+
+        if($success > 0)
+        {
+          $this->session->set_flashdata('response','เพิ่มเอกสารประกอบการเรียนเรียบร้อยแล้ว');
+        }else{
+
+          $this->session->set_flashdata('msg','เพิ่มเอกสารประกอบการเรียนไม่สำเร็จ กรุณาลองใหม่อีกครั้ง !!.');
+        }
+          redirect('file_teacher?id='.$this->input->post('room_id'));
+
+      }else{
+        $this->load->view('login');
+      }
+    }
+
+    public function downloadDocument()
+    {
+
+      if($this->session->userdata('username') != '')
+      {
+        $id = $this->input->get('id');
+        
+        if (!empty($id)) {
+          $myFile = $this->db->get_where('tbl_file_teacher',['id' => $id])->row();
+          if (isset($myFile)) {
+            $this->load->helper('download');
+            force_download(FCPATH.$myFile->path.'/'.$myFile->file_name, null);
+          }
+        }
+        redirect('file_teacher');
+            
+      }
+      else
+      {
+      redirect('login');
+      }
+
+    }
 
 }
