@@ -28,3 +28,4 @@ $route['downloadDocument'] = 'funtion/Index_ctr/downloadDocument';
 $route['Register'] = 'funtion/Register_ctr'; 
 
 $route['Register_complete'] = 'funtion/Register_ctr/regist_complete'; 
+$route['teacher_my_room'] = 'funtion/Index_ctr/teacher_my_room'; 

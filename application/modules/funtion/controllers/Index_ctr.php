@@ -24,7 +24,10 @@ class Index_ctr extends CI_Controller {
 	public function index()
 	{
       if ($this->session->userdata('username') != ''){
-          $data['user'] = $this->db->get_where('tbl_users',['username' => $this->session->userdata('username')])->row();
+          $data['user'] = $this->db->get_where('tbl_users',['username' => $this->session->userdata('username'),'type' => 'teacher'])->row();
+          if(empty($data['user'])){
+              $this->load->view('login');
+          }
           $data['rooms'] = $this->db->order_by('id', 'DESC')->get('tbl_rooms')->result_array();
           $this->load->view('option/header'); 
           $this->load->view('index', $data);
@@ -41,10 +44,11 @@ class Index_ctr extends CI_Controller {
 	{
 		if ($this->session->userdata('username') != '')
         {
-
-			$this->load->view('option/header');
-			$this->load->view('add_room');
-			$this->load->view('option/footer');
+          $data['type'] = $this->input->get('type');
+         
+          $this->load->view('option/header');
+          $this->load->view('add_room',$data);
+          $this->load->view('option/footer');
         }else{
             $this->load->view('login');
         }
@@ -77,7 +81,13 @@ class Index_ctr extends CI_Controller {
 
           $this->session->set_flashdata('msg','สร้างห้องเรียนไม่สำเร็จ กรุณาลองใหม่อีกครั้ง !!.');
         }
+
+        if ($this->input->post('type') == "teacher") {
+          redirect('teacher_my_room');
+        }else{
           redirect('index');
+        }
+          
       }else{
           $this->load->view('login');
       }
@@ -88,6 +98,7 @@ class Index_ctr extends CI_Controller {
       if ($this->session->userdata('username') != '')
           {
             $data['room'] = $this->db->get_where('tbl_rooms',['id'=>$this->input->get('id')])->row();
+            $data['type'] = $this->input->get('type');
             $this->load->view('option/header');
             $this->load->view('detail_room',$data);
             $this->load->view('option/footer');
@@ -104,6 +115,8 @@ class Index_ctr extends CI_Controller {
           {
               $teacher = $this->db->get_where('tbl_users',['username' => $this->session->userdata('username')])->row();
               $data['room'] = $this->db->get_where('tbl_rooms',['id'=> $this->input->get('id'),'teacher_id'=>$teacher->id])->row();
+              $data['type'] = $this->input->get('type');
+ 
               $this->load->view('option/header');
               $this->load->view('edit_room',$data);
               $this->load->view('option/footer');
@@ -142,7 +155,12 @@ class Index_ctr extends CI_Controller {
 
           $this->session->set_flashdata('msg','แก้ไขห้องเรียนไม่สำเร็จ กรุณาลองใหม่อีกครั้ง !!.');
         }
+
+        if ($this->input->post('type') == "teacher") {
+          redirect('teacher_my_room');
+        }else{
           redirect('index');
+        }
 
       }else{
         $this->load->view('login');
@@ -170,7 +188,11 @@ class Index_ctr extends CI_Controller {
 
           $this->session->set_flashdata('msg','ลบห้องเรียนไม่สำเร็จ กรุณาลองใหม่อีกครั้ง !!.');
         }
-          redirect('index');
+          if ($this->input->get('type') == "teacher") {
+            redirect('teacher_my_room');
+          }else{
+            redirect('index');
+          }
 
       }else{
         $this->load->view('login');
@@ -190,6 +212,7 @@ class Index_ctr extends CI_Controller {
 
         $data['room'] = $room;
         $data['file'] = $file;
+        $data['type'] = $this->input->get('type');
 
         $this->load->view('option/header');
         $this->load->view('file_teacher',$data);
@@ -283,6 +306,25 @@ class Index_ctr extends CI_Controller {
       redirect('login');
       }
 
+    }
+
+    public function teacher_my_room()
+    {
+        if ($this->session->userdata('username') != ''){
+            $data['user'] = $this->db->get_where('tbl_users',['username' => $this->session->userdata('username'),'type' => 'teacher'])->row_array();
+            if(empty($data['user'])){
+              $this->load->view('login');
+            }
+            $data['rooms'] = $this->db->order_by('id', 'DESC')->get_where('tbl_rooms',['teacher_id' => $data['user']['id']])->result_array();
+            $this->load->view('option/header'); 
+            $this->load->view('teacher_my_room', $data);
+            $this->load->view('option/footer');
+            
+        }else{
+            $this->load->view('login');
+        }
+      
+  
     }
 
 }

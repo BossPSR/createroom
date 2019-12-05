@@ -59,10 +59,17 @@
                                                 <div class="col-md-12">
                                                     <div class="p-20">
                                                         <div class="form-group">
-                                                            <label>เอกสารประกอบการเรียน (Handout)</label>
-                                                            <?php foreach ($file as $file) { ?>
-                                                                <a href="<?php echo site_url('downloadDocument?id=').$file['id']; ?>" style="display:inline-block ;"><button class="btn btn-success btn-block waves-effect waves-light" type="button"><i class="fa fa-file-pdf-o" aria-hidden="true"></i> ดาวน์โหลดเอกสาร</button></a>
-                                                            <?php } ?>
+                                                            <label style="font-size:18px;">เอกสารประกอบการเรียน (Handout)</label>
+                                                            <div>
+                                                                <?php foreach ($file as $file) { ?>
+                                                                    <a class="form-group" href="<?php echo site_url('downloadDocument?id=').$file['id']; ?>" style="display:inline-block ;"><button class="btn btn-info btn-block waves-effect waves-light" type="button"><i class="fa fa-file-pdf-o" aria-hidden="true"></i> <?php echo $file['file_name'];?></button></a>
+                                                                    <div class="form-group">
+                                                                        <label>คำอธิบาย (Description)</label>
+                                                                        <div class="form-control"><?php echo empty($file['description']) ? "-" : $file['description'] ; ?></div>
+                                                                    </div>
+                                                                    <hr>
+                                                                <?php } ?>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -75,6 +82,7 @@
                                     <?php } ?> 
                                         <form action="file_teacher_process" method="post" enctype="multipart/form-data"> 
                                         <input type="hidden" name="room_id" value="<?php echo $room['id']; ?>">
+                                            
                                             <div class="row">     
                                                 <div class="col-md-12">
                                                     <div class="p-20">
@@ -88,8 +96,8 @@
                                                 <div class="col-md-12">
                                                     <div class="p-20">
                                                         <div class="form-group">
-                                                            <label>คำอธิบาย (Description)</label>
-                                                            <textarea class="form-control" name="description" rows="10"></textarea>
+                                                            <label>คำอธิบาย (Description) <span style="color:red;">* หากไม่มีให้ใส่ - *</span></label>
+                                                            <textarea class="form-control" name="description" rows="10" required></textarea>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -98,7 +106,11 @@
                                                 <div class="col-md-12">
                                                     <div class="p-20">
                                                             <button type="submit" class="btn btn-success">บันทึกข้อมูล</button>
-                                                            <a href="index"><button type="button" class="btn btn-danger">ย้อนกลับ</button></a>
+                                                            <?php if(isset($type) && $type == "teacher"){ ?>
+                                                                <a href="teacher_my_room"><button type="button" class="btn btn-danger">ย้อนกลับ</button></a>
+                                                            <?php }else{ ?>
+                                                                <a href="index"><button type="button" class="btn btn-danger">ย้อนกลับ</button></a>
+                                                            <?php } ?>
                                                     </div>
                                                 </div>
                                             </div>
