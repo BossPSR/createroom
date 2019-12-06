@@ -178,6 +178,17 @@ class Index_ctr extends CI_Controller {
             redirect('index');
         }
 
+        $deletePathAll = $this->db->get_where('tbl_file_teacher',['room_id'=> $this->input->get('id')])->result_array();
+        foreach ($deletePathAll as $deletePath) {
+        
+          if (!empty($deletePath['path'])) {
+            unlink('./'.$deletePath['path'].'/'.$deletePath['file_name']);
+            $this->db->where('id',$deletePath['id']);
+            $this->db->delete('tbl_file_teacher');
+          }
+
+        }
+
         $this->db->where('id',$this->input->get('id'));
         $success = $this->db->delete('tbl_rooms');
 
@@ -237,7 +248,7 @@ class Index_ctr extends CI_Controller {
         }
 
         $this->load->library('upload');
-        $path = 'uploads/file/teacher/'.$teacher->id.'/'.strtotime(date('Y-m-d H:i:s'));
+        $path = 'uploads/file/teacher/room/'.$room->id.'/'.strtotime(date('Y-m-d H:i:s'));
         $config['upload_path'] = $path;
         $config['allowed_types'] = '*';
         $config['max_size']     = '200480';
@@ -325,6 +336,40 @@ class Index_ctr extends CI_Controller {
         }
       
   
+    }
+
+    public function delete_file_teacher()
+    {
+      if ($this->session->userdata('username') != '')
+      {
+        $teacher = $this->db->get_where('tbl_users',['username' => $this->session->userdata('username')])->row();
+        $room = $this->db->get_where('tbl_rooms',['id'=> $this->input->get('room_id'),'teacher_id' => $teacher->id])->row();
+
+        if (empty($room)) {
+            redirect('index');
+        }
+
+        $deletePath = $this->db->get_where('tbl_file_teacher',['id'=> $this->input->get('id')])->row_array();
+        if (!empty($deletePath['path'])) {
+          unlink('./'.$deletePath['path'].'/'.$deletePath['file_name']);
+        }
+
+        $this->db->where('id',$this->input->get('id'));
+        $success = $this->db->delete('tbl_file_teacher');
+
+        if($success > 0)
+        {
+          $this->session->set_flashdata('response','ลบห้องเรียนเรียบร้อยแล้ว');
+        }else{
+
+          $this->session->set_flashdata('msg','ลบห้องเรียนไม่สำเร็จ กรุณาลองใหม่อีกครั้ง !!.');
+        }
+         
+          redirect('file_teacher?id='.$this->input->get('room_id'));
+
+      }else{
+        $this->load->view('login');
+      }
     }
 
 }

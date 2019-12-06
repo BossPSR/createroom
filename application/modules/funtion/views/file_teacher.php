@@ -55,19 +55,24 @@
                                     if (!empty($file)) {
                                 ?>
                                             <div class="row">
-
+                                           
                                                 <div class="col-md-12">
                                                     <div class="p-20">
                                                         <div class="form-group">
                                                             <label style="font-size:18px;">เอกสารประกอบการเรียน (Handout)</label>
                                                             <div>
-                                                                <?php foreach ($file as $file) { ?>
+                                                                <?php foreach ($file as $key => $file) { 
+                                                                    $key += 1;
+                                                                    $nameFile = explode('.',$file['file_name']);
+                                                                ?>
+                                                                    <label style="display:block;">เอกสารที่ <?php echo $key.'.'.$nameFile[0]; ?></label>
                                                                     <a class="form-group" href="<?php echo site_url('downloadDocument?id=').$file['id']; ?>" style="display:inline-block ;"><button class="btn btn-info btn-block waves-effect waves-light" type="button"><i class="fa fa-file-pdf-o" aria-hidden="true"></i> <?php echo $file['file_name'];?></button></a>
+                                                                    <a href="delete_file_teacher?id=<?php echo $file['id'];?>&room_id=<?php echo $room['id'];?>"  onclick="return confirm('ท่านต้องการลบเอกสารประกอบการเรียน ?')"><button type="button" class="btn btn-danger"><i class="fa fa-trash" aria-hidden="true"></i> ลบเอกสารประกอบการเรียน</button></a>
                                                                     <div class="form-group">
                                                                         <label>คำอธิบาย (Description)</label>
                                                                         <div class="form-control"><?php echo empty($file['description']) ? "-" : $file['description'] ; ?></div>
                                                                     </div>
-                                                                    <hr>
+                                                                    
                                                                 <?php } ?>
                                                             </div>
                                                         </div>
@@ -77,7 +82,7 @@
 
                                                
                                             </div>
-                                             
+                                            <hr style="border: 1px  dashed;"><br> 
 
                                     <?php } ?> 
                                         <form action="file_teacher_process" method="post" enctype="multipart/form-data"> 

@@ -23,7 +23,7 @@ $route['delete_room'] = 'funtion/Index_ctr/delete_room';
 $route['file_teacher'] = 'funtion/Index_ctr/file_teacher';
 $route['file_teacher_process'] = 'funtion/Index_ctr/file_teacher_process';
 $route['downloadDocument'] = 'funtion/Index_ctr/downloadDocument';
-
+$route['delete_file_teacher'] = 'funtion/Index_ctr/delete_file_teacher';
 
 $route['Register'] = 'funtion/Register_ctr'; 
 
