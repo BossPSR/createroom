@@ -8,7 +8,7 @@
                             <div class="btn-group pull-right">
                                 <a href="add_room"><button class="btn btn-success">สร้างห้องเรียน <i class="mdi mdi-book-open-page-variant"></i></button></a>
                             </div>
-                            <h4 class="page-title"><?php echo $user->type == 'teacher' ? "ห้องเรียนทั้งหมด":"ห้องเรียนที่นักเรียนสามารถเข้าได้"; ?></h4>
+                            <h4 class="page-title">ห้องเรียนทั้งหมด</h4>
                         </div>
                     </div>
                 </div>
@@ -32,7 +32,7 @@
                 <div class="row">
                
                    <?php foreach ($rooms as $room) { ?>
-                   <?php $teacher = $this->db->get_where('tbl_users',['id' => $room['teacher_id']])->row();
+                   <?php $teacher = $this->db->get_where('tbl_teacher',['id' => $room['teacher_id']])->row();
                          if (isset($teacher)) {
                     ?>
                     <div class="col-lg-4">

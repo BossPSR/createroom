@@ -24,7 +24,7 @@ class Index_ctr extends CI_Controller {
 	public function index()
 	{
       if ($this->session->userdata('username') != ''){
-          $data['user'] = $this->db->get_where('tbl_users',['username' => $this->session->userdata('username'),'type' => 'teacher'])->row();
+          $data['user'] = $this->db->get_where('tbl_teacher',['username' => $this->session->userdata('username')])->row();
           if(empty($data['user'])){
               $this->load->view('login');
           }
@@ -59,7 +59,7 @@ class Index_ctr extends CI_Controller {
     {
       if ($this->session->userdata('username') != '')
       {
-        $teacher = $this->db->get_where('tbl_users',['username' => $this->session->userdata('username')])->row();
+        $teacher = $this->db->get_where('tbl_teacher',['username' => $this->session->userdata('username')])->row();
         $data = array(
           'room'        => $this->input->post('name_room'),
           'sec'         => $this->input->post('sec'),
@@ -113,7 +113,7 @@ class Index_ctr extends CI_Controller {
     {
       if ($this->session->userdata('username') != '')
           {
-              $teacher = $this->db->get_where('tbl_users',['username' => $this->session->userdata('username')])->row();
+              $teacher = $this->db->get_where('tbl_teacher',['username' => $this->session->userdata('username')])->row();
               $data['room'] = $this->db->get_where('tbl_rooms',['id'=> $this->input->get('id'),'teacher_id'=>$teacher->id])->row();
               $data['type'] = $this->input->get('type');
  
@@ -129,7 +129,7 @@ class Index_ctr extends CI_Controller {
     {
       if ($this->session->userdata('username') != '')
       {
-        $teacher = $this->db->get_where('tbl_users',['username' => $this->session->userdata('username')])->row();
+        $teacher = $this->db->get_where('tbl_teacher',['username' => $this->session->userdata('username')])->row();
         $room = $this->db->get_where('tbl_rooms',['id'=> $this->input->post('id'),'teacher_id' => $teacher->id])->row();
 
         if (empty($room)) {
@@ -171,7 +171,7 @@ class Index_ctr extends CI_Controller {
     {
       if ($this->session->userdata('username') != '')
       {
-        $teacher = $this->db->get_where('tbl_users',['username' => $this->session->userdata('username')])->row();
+        $teacher = $this->db->get_where('tbl_teacher',['username' => $this->session->userdata('username')])->row();
         $room = $this->db->get_where('tbl_rooms',['id'=> $this->input->get('id'),'teacher_id' => $teacher->id])->row();
 
         if (empty($room)) {
@@ -214,7 +214,7 @@ class Index_ctr extends CI_Controller {
     {
       if ($this->session->userdata('username') != '')
       {
-        $teacher = $this->db->get_where('tbl_users',['username' => $this->session->userdata('username')])->row();
+        $teacher = $this->db->get_where('tbl_teacher',['username' => $this->session->userdata('username')])->row();
         $room = $this->db->get_where('tbl_rooms',['id'=> $this->input->get('id'),'teacher_id' => $teacher->id])->row_array();
         if (empty($room)) {
           redirect('index');
@@ -240,7 +240,7 @@ class Index_ctr extends CI_Controller {
     {
       if ($this->session->userdata('username') != '')
       {
-        $teacher = $this->db->get_where('tbl_users',['username' => $this->session->userdata('username')])->row();
+        $teacher = $this->db->get_where('tbl_teacher',['username' => $this->session->userdata('username')])->row();
         $room = $this->db->get_where('tbl_rooms',['id'=> $this->input->post('room_id'),'teacher_id' => $teacher->id])->row();
 
         if (empty($room)) {
@@ -322,7 +322,7 @@ class Index_ctr extends CI_Controller {
     public function teacher_my_room()
     {
         if ($this->session->userdata('username') != ''){
-            $data['user'] = $this->db->get_where('tbl_users',['username' => $this->session->userdata('username'),'type' => 'teacher'])->row_array();
+            $data['user'] = $this->db->get_where('tbl_teacher',['username' => $this->session->userdata('username')])->row_array();
             if(empty($data['user'])){
               $this->load->view('login');
             }
@@ -342,7 +342,7 @@ class Index_ctr extends CI_Controller {
     {
       if ($this->session->userdata('username') != '')
       {
-        $teacher = $this->db->get_where('tbl_users',['username' => $this->session->userdata('username')])->row();
+        $teacher = $this->db->get_where('tbl_teacher',['username' => $this->session->userdata('username')])->row();
         $room = $this->db->get_where('tbl_rooms',['id'=> $this->input->get('room_id'),'teacher_id' => $teacher->id])->row();
 
         if (empty($room)) {
