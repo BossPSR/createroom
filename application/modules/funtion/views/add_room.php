@@ -69,7 +69,19 @@
                                                         </div>
                                                     </div>
                                                 </div>
-
+                                                <div class="col-md-12">
+                                                    <div class="p-20">
+                                                        <div class="form-group">
+                                                            <label>เวลา (Time) <span style="color:red;">*</span></label>
+                                                            <div style="display:flex">
+                                                                <input style="width:30%;" type="time" value="08:00:00" class="form-control" name="start_time"  required>
+                                                                    <div style="justify-content: center;display: flex;align-items: center; font-size:10px; margin: 0 5px;"><i class="fa fa-minus" aria-hidden="true"></i></div>
+                                                                <input style="width:30%;" type="time" value="09:00:00" class="form-control" name="end_time"  required>
+                                                            </div>
+                                                            
+                                                        </div>
+                                                    </div>
+                                                </div>
                                                
                                             </div>
                                              <div class="row">
@@ -112,3 +124,10 @@
                                         readURL(this);
                                         });
                                 </script>
+                                <script type="text/javascript">
+                                $(function () {
+                                    $('#datetimepicker3').datetimepicker({
+                                        format: 'LT'
+                                    });
+                                });
+                            </script>

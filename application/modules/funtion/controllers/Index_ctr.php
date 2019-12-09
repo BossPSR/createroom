@@ -67,6 +67,8 @@ class Index_ctr extends CI_Controller {
           'teacher_id'  => $teacher->id,
           'limit_room'  => $this->input->post('limit_room'),
           'generate'    => $this->generateRandomString(),
+          'start_time'  => $this->input->post('start_time'),
+          'end_time'    => $this->input->post('end_time'),
           'create_date' => date('Y-m-d'),
           'created_at'  => date('Y-m-d H:i:s'),
           'updated_at'  => date('Y-m-d H:i:s')
@@ -143,6 +145,8 @@ class Index_ctr extends CI_Controller {
           'teacher_id'  => $teacher->id,
           'limit_room'  => $this->input->post('limit_room'),
           'generate'    => $this->generateRandomString(),
+          'start_time'  => $this->input->post('start_time'),
+          'end_time'    => $this->input->post('end_time'),
           'updated_at'  => date('Y-m-d H:i:s')
         );
         $this->db->where('id',$this->input->post('id'));

@@ -45,6 +45,11 @@
                                             <h5 class="mt-0 font-16 mb-1">ห้อง : <?php echo $room['room']; ?></h5>
                                             <div class="font-16">วิชา : <?php echo $room['subject']; ?></div>
                                             <div class="font-16">เซค : <?php echo $room['sec']; ?></div>
+                                            <div class="font-16" style="display:flex">เวลา : 
+                                                <?php echo date('h:i A',strtotime($room['start_time'])); ?>
+                                                <div style="justify-content: center;display: flex;align-items: center; font-size:10px; margin: 0 5px;"><i class="fa fa-minus" aria-hidden="true"></i></div>
+                                                <?php echo date('h:i A',strtotime($room['end_time'])); ?>
+                                            </div>
                                             <div class="mt-0 font-16 mb-1">ผู้สอน : <?php echo $teacher->title.$teacher->first_name.' '.$teacher->last_name; ?></div>
                                             
                                         <div>
