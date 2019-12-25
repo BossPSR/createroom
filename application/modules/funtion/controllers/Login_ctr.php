@@ -62,9 +62,85 @@ class Login_ctr extends CI_Controller
     {
         if ($this->session->userdata('username') != '')
         {
+            $data['user'] = $this->db->get_where('tbl_teacher' ,['username' => $this->session->userdata('username')])->row_array();
+
             $this->load->view('option/header');
-            $this->load->view('profile');
+            $this->load->view('profile',$data);
             $this->load->view('option/footer');
+
+        }else{
+            $this->load->view('login');
+        }
+    }
+
+    public function edit_profile()
+    {
+        if ($this->session->userdata('username') != '')
+        {
+            $teacher = $this->db->get_where('tbl_teacher',['username' => $this->session->userdata('username')])->row();
+            $data = array(
+              'username'        => $this->input->post('username'),
+              'title'         => $this->input->post('title'),
+              'first_name'  => $this->input->post('first_name'),
+              'last_name'  => $this->input->post('last_name'),
+              'updated_at'  => date('Y-m-d H:i:s')
+            );
+            $this->db->where('id',$teacher->id);
+            $success = $this->db->update('tbl_teacher',$data);
+    
+            if($success > 0)
+            {
+              $this->session->set_flashdata('response','แก้ไขโปรไฟล์เรียบร้อยแล้ว');
+            }else{
+    
+              $this->session->set_flashdata('msg','แก้ไขโปรไฟล์ไม่สำเร็จ กรุณาลองใหม่อีกครั้ง !!.');
+            }
+
+            redirect('profile');
+
+        }else{
+            $this->load->view('login');
+        }
+    }
+
+    public function edit_password()
+    {
+        if ($this->session->userdata('username') != '')
+        {
+            $password = $this->input->post('password');
+            $newpassword = $this->input->post('newpassword');
+            $confirmpassword = $this->input->post('confirmpassword');
+
+            $teacher = $this->db->get_where('tbl_teacher',['username' => $this->session->userdata('username')])->row();
+            $password = md5($password);
+            if ($password != $teacher->password) {
+                $this->session->set_flashdata('msg','รหัสผ่านเก่าของคุณไม่ถูกต้อง กรุณาลองใหม่อีกครั้ง !!.');
+                redirect('profile');
+            }
+
+            if ($newpassword != $confirmpassword) {
+                $this->session->set_flashdata('msg','รหัสผ่านใหม่กับยืนยันรหัสผ่านใหม่ของคุณไม่ตรงกัน กรุณากรอกให้ตรงกัน !!.');
+                redirect('profile');
+            }
+
+            $confirmpassword = md5($confirmpassword);
+
+            $data = array(
+              'password'        => $confirmpassword,
+              'updated_at'  => date('Y-m-d H:i:s')
+            );
+            $this->db->where('id',$teacher->id);
+            $success = $this->db->update('tbl_teacher',$data);
+    
+            if($success > 0)
+            {
+              $this->session->set_flashdata('response','แก้ไขรหัสผ่านเรียบร้อยแล้ว');
+            }else{
+    
+              $this->session->set_flashdata('msg','แก้ไขรหัสผ่านไม่สำเร็จ กรุณาลองใหม่อีกครั้ง !!.');
+            }
+
+            redirect('profile');
 
         }else{
             $this->load->view('login');

@@ -13,6 +13,8 @@ $route['Login'] = 'funtion/Login_ctr/login';
 $route['LoginMe'] = 'funtion/Login_ctr/loginMe';
 $route['LogOut'] = 'funtion/Login_ctr/logout';
 $route['profile'] = 'funtion/Login_ctr/profile'; 
+$route['edit_profile'] = 'funtion/Login_ctr/edit_profile'; 
+$route['edit_password'] = 'funtion/Login_ctr/edit_password'; 
 
 $route['index'] = 'funtion/Index_ctr/index'; 
 $route['add_room'] = 'funtion/Index_ctr/add_room';
