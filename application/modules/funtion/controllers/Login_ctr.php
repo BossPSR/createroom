@@ -57,6 +57,19 @@ class Login_ctr extends CI_Controller
 
         redirect('Login');//กลับไปหน้า Login
     }
+
+    public function profile()
+    {
+        if ($this->session->userdata('username') != '')
+        {
+            $this->load->view('option/header');
+            $this->load->view('profile');
+            $this->load->view('option/footer');
+
+        }else{
+            $this->load->view('login');
+        }
+    }
 }
 
 

@@ -12,6 +12,7 @@ $route['translate_uri_dashes'] = FALSE;
 $route['Login'] = 'funtion/Login_ctr/login';
 $route['LoginMe'] = 'funtion/Login_ctr/loginMe';
 $route['LogOut'] = 'funtion/Login_ctr/logout';
+$route['profile'] = 'funtion/Login_ctr/profile'; 
 
 $route['index'] = 'funtion/Index_ctr/index'; 
 $route['add_room'] = 'funtion/Index_ctr/add_room';
