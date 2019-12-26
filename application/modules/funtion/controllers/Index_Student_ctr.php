@@ -33,7 +33,7 @@ class Index_Student_ctr extends CI_Controller {
 		if ($this->session->userdata('email') != '')
         {
 			$data['room'] = $this->db->get_where('tbl_rooms',['id'=>$this->input->get('id')])->row();
-
+			$data['type'] = $this->input->get('type');
 			$this->load->view('option_student/header_student');
 			$this->load->view('detail_room_student',$data);
 			$this->load->view('option_student/footer_student');
@@ -46,10 +46,14 @@ class Index_Student_ctr extends CI_Controller {
 	{
 		if ($this->session->userdata('email') != '')
         {
-			
+			$data['user'] = $this->db->get_where('tbl_student',['email' => $this->session->userdata('email')])->row();
+			if(empty($data['user'])){
+				$this->load->view('login');
+			}
+			$data['rooms'] = $this->db->order_by('id', 'DESC')->get('tbl_rooms')->result_array();
 
 			$this->load->view('option_student/header_student');
-			$this->load->view('student_my_room');
+			$this->load->view('student_my_room',$data);
 			$this->load->view('option_student/footer_student');
         }else{
             $this->load->view('login');
@@ -140,6 +144,113 @@ class Index_Student_ctr extends CI_Controller {
         }else{
             $this->load->view('login');
         }
+	}
+	
+	public function class_room_student()
+	{
+		if ($this->session->userdata('email') != '')
+        {
+			$id = $this->input->post('id');
+			$password = $this->input->post('password');
+			$student = $this->db->get_where('tbl_student',['email' => $this->session->userdata('email')])->row_array();
+			$room = $this->db->get_where('tbl_rooms',['id' => $id])->row_array();
+
+			//หาห้องเรียนไม่เจอ
+			if (empty($room)) {
+				$this->session->set_flashdata('msg','ไม่พบห้องเรียนนี้ กรุณาลองใหม่อีกครั้ง !!.');
+				redirect('index_student');
+			}
+
+			//รหัสห้องเรียนผิด
+			$room = $this->db->get_where('tbl_rooms',['id' => $id,'generate' => $password])->row_array();
+			if (empty($room)) {
+				$this->session->set_flashdata('msg','รหัสผ่านการเข้าห้องเรียนไม่ถูกต้อง กรุณาลองใหม่อีกครั้ง !!.');
+				redirect('index_student');
+			}
+
+			//เข็คว่านักเรียนคนนี้เข้าไปแล้ว
+			$student_room = $this->db->get_where('tbl_student_room',['room_id' => $id,'student_id' => $student['id']])->row_array();
+			if (!empty($student_room)) {
+				$this->session->set_flashdata('msg','คุณได้เข้าห้องเรียนไปแล้ว.');
+				redirect('index_student');
+			}
+
+			//เช็คห้องเรียนว่าเต็มหรือยัง
+			$student_roomAll = $this->db->get_where('tbl_student_room',['room_id' => $id])->result_array();
+			$student_roomNum = count($student_roomAll);
+			if ($student_roomNum >= $room['limit_room']) {
+				$this->session->set_flashdata('msg','ห้องเรียนนี้เต็มแล้วค่ะ.');
+				redirect('index_student');
+			}
+
+			//เข้าห้องเรียนสำเร็จ
+			$data = [
+				'student_id' => $student['id'],
+				'room_id' => $id,
+				'create_date' => date('Y-m-d'),
+				'created_at' => date('Y-m-d H:i:s'),
+				'updated_at' => date('Y-m-d H:i:s')
+			];
+			$success = $this->db->insert('tbl_student_room',$data);
+			
+			if($success > 0)
+            {
+              $this->session->set_flashdata('response','ยินดีด้วยคุณสามารถเข้าเรียนนี้ได้แล้วไปที่เมนู My Room ได้เลยค่ะ');
+            }else{
+    
+              $this->session->set_flashdata('msg','เข้าเรียนนี้ไม่สำเร็จ กรุณาลองใหม่อีกครั้ง !!.');
+            }
+
+            redirect('index_student');
+			
+        }else{
+            $this->load->view('login');
+        }
+	}
+
+	public function file_teacher_student()
+	{
+		if ($this->session->userdata('email') != '')
+        {
+			$student = $this->db->get_where('tbl_student',['email' => $this->session->userdata('email')])->row();
+			$room = $this->db->get_where('tbl_rooms',['id'=> $this->input->get('id')])->row_array();
+			if (empty($room)) {
+				redirect('index_student');
+			}
+			$file = $this->db->get_where('tbl_file_teacher',['room_id' => $room['id']])->result_array();
+			$data['room'] = $room;
+			$data['file'] = $file;
+
+			$this->load->view('option_student/header_student');
+			$this->load->view('file_teacher_student',$data);
+			$this->load->view('option_student/footer_student');
+        }else{
+            $this->load->view('login');
+        }
+	}
+
+	public function downloadDocument()
+    {
+
+      if($this->session->userdata('email') != '')
+      {
+        $id = $this->input->get('id');
+        
+        if (!empty($id)) {
+		  $myFile = $this->db->get_where('tbl_file_teacher',['id' => $id])->row();
+          if (isset($myFile)) {
+            $this->load->helper('download');
+            force_download(FCPATH.$myFile->path.'/'.$myFile->file_name, null);
+          }
+        }
+        redirect('file_teacher_student');
+			
+      }
+      else
+      {
+      redirect('login');
+      }
+
     }
 
 }

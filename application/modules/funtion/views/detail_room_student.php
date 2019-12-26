@@ -91,8 +91,8 @@
                                             <div class="row">
                                                 <div class="col-md-12">
                                                     <div class="p-20">
-                                                            <?php if(isset($type) && $type == "teacher"){ ?>
-                                                                <a href="teacher_my_room"><button type="button" class="btn btn-danger">ย้อนกลับ</button></a>
+                                                            <?php if(isset($type) && $type == "student"){ ?>
+                                                                <a href="student_my_room"><button type="button" class="btn btn-danger">ย้อนกลับ</button></a>
                                                             <?php }else{ ?>
                                                                 <a href="index_student"><button type="button" class="btn btn-danger">ย้อนกลับ</button></a>
                                                             <?php } ?>

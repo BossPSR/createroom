@@ -40,3 +40,6 @@ $route['student_my_room'] = 'funtion/Index_Student_ctr/student_my_room';
 $route['profile_student'] = 'funtion/Index_Student_ctr/profile_student'; 
 $route['edit_profile_student'] = 'funtion/Index_Student_ctr/edit_profile_student'; 
 $route['edit_password_student'] = 'funtion/Index_Student_ctr/edit_password_student'; 
+$route['class_room_student'] = 'funtion/Index_Student_ctr/class_room_student'; 
+$route['file_teacher_student'] = 'funtion/Index_Student_ctr/file_teacher_student'; 
+$route['downloadDocument_student'] = 'funtion/Index_Student_ctr/downloadDocument'; 

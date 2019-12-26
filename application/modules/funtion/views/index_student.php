@@ -55,7 +55,13 @@
                                             
                                         <div>
                                             <a href="detail_room_student?id=<?php echo $room['id'];?>"><button type="button" class="btn btn-success"><i class="fa fa-file-text" aria-hidden="true"></i></button></a>
-                                            <div style="display:inline-block" data-toggle="modal" data-target="#exampleModal<?php echo $room['id'];?>"><button type="button" class="btn btn-primary"><i class="fa fa-laptop" aria-hidden="true"></i></button></div>
+                                            <?php 
+                                                $student_room = $this->db->get_where('tbl_student_room',['student_id' => $user->id,'room_id' => $room['id']])->row_array();
+                                                if (empty($student_room)) {
+                                                   
+                                            ?>
+                                            <div style="display:inline-block" data-toggle="modal" data-target="#exampleModal<?php echo $room['id'];?>"><button type="button" class="btn btn-primary"><i class="fa fa-key" aria-hidden="true"></i></button></div>
+                                            <?php } ?>
                                         </div>
                                          <!-- Modal -->
                                          <div class="modal fade" id="exampleModal<?php echo $room['id'];?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -67,11 +73,12 @@
                                                         <span aria-hidden="true">&times;</span>
                                                         </button>
                                                     </div>
-                                                    <form action="" method="post">
+                                                    <form action="class_room_student" method="post">
                                                         <div class="modal-body">
                                                             <div class="col-md-12">
                                                                 <div class="p-20">
                                                                     <div class="form-group">
+                                                                        <input type="hidden" name="id" value="<?php echo $room['id']; ?>">
                                                                         <label>รหัสเข้าห้องเรียน <span style="color:red;">*</span></label>
                                                                         <input type="text" placeholder="" class="form-control" name="password" value="" required>
                                                                     </div>

@@ -31,7 +31,12 @@
 
                 <div class="row">
                
-                  
+                   <?php foreach ($rooms as $room) { 
+                       $student_room = $this->db->get_where('tbl_student_room' ,['student_id' => $user->id,'room_id' => $room['id']])->row_array();
+                       if (!empty($student_room)) {
+                          
+                   ?>
+                    
                     <div class="col-lg-4">
                         <div class="card m-b-30">
                             <div class="card-body">
@@ -39,16 +44,24 @@
                                 <div class="media">
                                     <img class="d-flex mr-3 rounded-circle img-thumbnail thumb-lg" src="public/assets/images/room.jpg" alt="Generic placeholder image">
                                     <div class="media-body">
-                                            
+                                            <h5 class="mt-0 font-16 mb-1">ห้อง : <?php echo $room['room']; ?></h5>
+                                            <div class="font-16">วิชา : <?php echo $room['subject']; ?></div>
+                                            <div class="font-16">เซค : <?php echo $room['sec']; ?></div>
+                                            <div class="font-16" style="display:flex">เวลา : 
+                                                <?php echo date('h:i A',strtotime($room['start_time'])); ?>
+                                                <div style="justify-content: center;display: flex;align-items: center; font-size:10px; margin: 0 5px;"><i class="fa fa-minus" aria-hidden="true"></i></div>
+                                                <?php echo date('h:i A',strtotime($room['end_time'])); ?>
+                                            </div>
+                                            <?php 
+                                                $teacher = $this->db->get_where('tbl_teacher',['id' => $room['teacher_id']])->row_array();
+                                            ?>
+                                            <div class="mt-0 font-16 mb-1">ผู้สอน : <?php echo $teacher['title'].$teacher['first_name'].' '.$teacher['last_name']; ?></div>
                                             
                                         <div>
-                                            
-
-                                            <!-- Modal -->
-
-     
+                                            <a href="detail_room_student?id=<?php echo $room['id'];?>&type=student"><button type="button" class="btn btn-success"><i class="fa fa-file-text" aria-hidden="true"></i></button></a>
+                                            <a href="file_teacher_student?id=<?php echo $room['id'];?>"><button type="button" class="btn btn-info"><i class="fa fa-file-archive-o" aria-hidden="true"></i></button></a>
+                                            <div style="display:inline-block"><button type="button" class="btn btn-primary"><i class="fa fa-laptop" aria-hidden="true"></i></button></div>
                                         </div>
-
 
                                         
                                         <!-- <ul class="social-links list-inline mb-0">
@@ -71,7 +84,8 @@
                             </div>
                         </div>
                     </div> <!-- end col -->
-
+                    <?php } ?>
+                    <?php } ?>
                 </div> <!-- end row -->
 
             </div> <!-- end container -->
