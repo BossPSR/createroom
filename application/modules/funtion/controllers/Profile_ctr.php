@@ -9,19 +9,6 @@ class Profile_ctr extends CI_Controller {
 		
 	}
 
-	public function index()
-	{
-		if ($this->session->userdata('email') != '')
-        {
-			$this->load->view('option/header');
-			$this->load->view('profile');
-			$this->load->view('option/footer');
-        }else{
-            $this->load->view('login');
-        }
-		
-
-	}
 	public function profile()
     {
         $id   	= $this->input->post('id');

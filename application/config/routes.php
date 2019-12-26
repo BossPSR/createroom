@@ -32,3 +32,9 @@ $route['Register'] = 'funtion/Register_ctr';
 
 $route['Register_complete'] = 'funtion/Register_ctr/regist_complete'; 
 $route['teacher_my_room'] = 'funtion/Index_ctr/teacher_my_room'; 
+
+// Student
+$route['index_student'] = 'funtion/Index_Student_ctr/index_student'; 
+$route['detail_room_student'] = 'funtion/Index_Student_ctr/detail_room_student'; 
+$route['student_my_room'] = 'funtion/Index_Student_ctr/student_my_room'; 
+$route['profile_student'] = 'funtion/Index_Student_ctr/profile_student'; 

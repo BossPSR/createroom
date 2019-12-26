@@ -39,6 +39,13 @@ class Login_ctr extends CI_Controller
                 $this->session->set_userdata($user_data);
                 redirect('Login');
             }
+            elseif($this->Login_model->login_student($username, $password)){
+                $user_data = array(
+                    'email' => $username
+                );
+                $this->session->set_userdata($user_data);
+                redirect('index_student');
+            }
             else
             {
                 $this->session->set_flashdata('error', '<div class="alert alert-danger" role="alert"><i class="fa fa-exclamation-triangle"></i> กรุณากรอก Username หรือ Password ให้ถูกต้อง !!   <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button></div>');

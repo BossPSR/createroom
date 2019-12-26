@@ -23,6 +23,23 @@ class Login_model extends CI_Model{
        }
 
     }
+
+    public function login_student($email, $password)
+    {
+       $this->db->where('email', $email);
+       $this->db->where('password', $password);
+       $query = $this->db->get('tbl_student');
+
+       if ($query->num_rows() > 0)
+       {
+        return true;
+       }
+       else
+       {
+        return false;
+       }
+
+    }
 }
 
 ?>
