@@ -44,3 +44,5 @@ $route['class_room_student'] = 'funtion/Index_Student_ctr/class_room_student';
 $route['file_teacher_student'] = 'funtion/Index_Student_ctr/file_teacher_student'; 
 $route['downloadDocument_student'] = 'funtion/Index_Student_ctr/downloadDocument'; 
 $route['learning_student'] = 'funtion/Index_Student_ctr/learning_student'; 
+$route['home_work_student'] = 'funtion/Index_Student_ctr/home_work_student'; 
+$route['home_work_process'] = 'funtion/Index_Student_ctr/home_work_process'; 

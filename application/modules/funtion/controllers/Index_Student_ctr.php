@@ -266,4 +266,82 @@ class Index_Student_ctr extends CI_Controller {
         }
 	}
 
+	public function home_work_student()
+	{
+		if ($this->session->userdata('email') != '')
+        {
+			$student = $this->db->get_where('tbl_student',['email' => $this->session->userdata('email')])->row();
+			$data['room'] = $this->db->get_where('tbl_rooms',['id'=>$this->input->get('id')])->row();
+			$data['home_work'] = $this->db->get_where('tbl_home_work',['student_id'=>$student->id,'room_id' => $this->input->get('id')])->result_array();
+			$this->load->view('option_student/header_student');
+			$this->load->view('home_work_student',$data);
+			$this->load->view('option_student/footer_student');
+        }else{
+            $this->load->view('login');
+        }
+	}
+
+	public function home_work_process()
+	{
+		if ($this->session->userdata('email') != '')
+        {
+				$student = $this->db->get_where('tbl_student',['email' => $this->session->userdata('email')])->row();
+				$room = $this->db->get_where('tbl_rooms',['id'=> $this->input->post('id'),'teacher_id' => $student->id])->row();
+		
+				if (empty($room)) {
+					redirect('student_my_room');
+				}
+		
+				$this->load->library('upload');
+				$path = 'uploads/file/student/'.$student->id.'/room/'.$room->id.'/'.strtotime(date('Y-m-d H:i:s'));
+				$config['upload_path'] = $path;
+				$config['allowed_types'] = '*';
+				$config['max_size']     = '200480';
+				$config['max_width'] = '50000';
+				$config['max_height'] = '50000';
+		
+				if(!is_dir($config['upload_path']))
+					{
+						mkdir($config['upload_path'],0777,true);
+				}
+			
+				$this->upload->initialize($config);
+				if ($_FILES['file_name']['name']) {
+					if ($this->upload->do_upload('file_name')) {
+						$gamber     = $this->upload->data();
+						$data = array(
+						'student_id'   => $student->id,
+						'room_id'     => $this->input->post('id'),
+						'file_name'   => $gamber['file_name'],
+						'path'        => $path,
+						
+						'description'     => $this->input->post('description'),
+						'create_date' => date('Y-m-d'),
+						'created_at'  => date('Y-m-d H:i:s'),
+						'updated_at'  => date('Y-m-d H:i:s')
+						);
+						$success = $this->db->insert('tbl_home_work',$data);
+					}
+				}
+		
+				
+		
+				
+		
+				if($success > 0)
+				{
+				$this->session->set_flashdata('response','ส่งการบ้านเรียบร้อยแล้ว');
+				}else{
+		
+				$this->session->set_flashdata('msg','ส่งการบ้านไม่สำเร็จ กรุณาลองใหม่อีกครั้ง !!.');
+				}
+				redirect('home_work_student?id='.$this->input->post('id'));
+			
+			
+
+        }else{
+            $this->load->view('login');
+        }
+	}
+
 }

@@ -116,20 +116,7 @@
                                          </div>
                                         <!-- End Modal -->
                                         
-                                        <!-- <ul class="social-links list-inline mb-0">
-                                            <li class="list-inline-item">
-                                                <a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="Facebook"><i class="fa fa-facebook"></i></a>
-                                            </li>
-                                            <li class="list-inline-item">
-                                                <a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="Twitter"><i class="fa fa-twitter"></i></a>
-                                            </li>
-                                            <li class="list-inline-item">
-                                                <a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="1234567890"><i class="fa fa-phone"></i></a>
-                                            </li>
-                                            <li class="list-inline-item">
-                                                <a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="@skypename"><i class="fa fa-skype"></i></a>
-                                            </li>
-                                         -->
+                                       
 
                                     </div>
                                 </div>
