@@ -251,6 +251,19 @@ class Index_Student_ctr extends CI_Controller {
       redirect('login');
       }
 
-    }
+	}
+	
+	public function learning_student()
+	{
+		if ($this->session->userdata('email') != '')
+        {
+			$data['room'] = $this->db->get_where('tbl_rooms',['id'=>$this->input->get('id')])->row();
+			$this->load->view('option_student/header_student');
+			$this->load->view('learning',$data);
+			$this->load->view('option_student/footer_student');
+        }else{
+            $this->load->view('login');
+        }
+	}
 
 }
