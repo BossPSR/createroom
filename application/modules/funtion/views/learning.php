@@ -56,7 +56,7 @@
                                                 
                                                 <div class="col-md-6">
                                                     <div class="p-20" style="height: 100%;">
-                                                        <div style="height:100%;background: #000;"></div>
+                                                        <div style="height:100%;background: #000; cursor: pointer;"></div>
                                                     </div>
                                                 </div>
                                                

@@ -49,6 +49,19 @@
                                                 <?php echo date('h:i A',strtotime($room['end_time'])); ?>
                                             </div>
                                             <?php 
+                                                $checkStudent_room = $this->db->get_where('tbl_student_room',['id' => $room['id']])->result_array();
+                                                $numStudent_roon = count($checkStudent_room);
+                                                $number = $room['limit_room'] - $numStudent_roon;
+                                                if ($number <= 0) {
+                                                    $numberResult = 'ที่นั่งเต็มแล้ว';
+                                            ?>
+                                                <div class="font-16"><span style="color:red;">เหลือ : <?php echo $numberResult; ?></span></div>
+                                            <?php 
+                                                }else{
+                                            ?>
+                                            <div class="font-16">เหลือ : <?php echo $number; ?> ที่นั่ง</div>
+                                            <?php 
+                                                }
                                                 $teacher = $this->db->get_where('tbl_teacher',['id' => $room['teacher_id']])->row_array();
                                             ?>
                                             <div class="mt-0 font-16 mb-1">ผู้สอน : <?php echo $teacher['title'].$teacher['first_name'].' '.$teacher['last_name']; ?></div>
@@ -58,10 +71,18 @@
                                             <?php 
                                                 $student_room = $this->db->get_where('tbl_student_room',['student_id' => $user->id,'room_id' => $room['id']])->row_array();
                                                 if (empty($student_room)) {
+                                                    if ($number <= 0) {
                                                    
                                             ?>
-                                            <div style="display:inline-block" data-toggle="modal" data-target="#exampleModal<?php echo $room['id'];?>"><button type="button" class="btn btn-primary"><i class="fa fa-key" aria-hidden="true"></i></button></div>
-                                            <?php } ?>
+                                                <div style="display:inline-block"><button type="button" class="btn btn-primary"><i class="fa fa-key" aria-hidden="true"></i></button></div>
+                                            <?php 
+                                                    }else{
+                                            ?>
+                                                <div style="display:inline-block" data-toggle="modal" data-target="#exampleModal<?php echo $room['id'];?>"><button type="button" class="btn btn-primary"><i class="fa fa-key" aria-hidden="true"></i></button></div>
+                                            <?php   
+                                                    }
+                                                }
+                                            ?>
                                         </div>
                                          <!-- Modal -->
                                          <div class="modal fade" id="exampleModal<?php echo $room['id'];?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
