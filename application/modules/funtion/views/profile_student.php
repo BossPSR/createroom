@@ -44,30 +44,30 @@
                                     <h3>โปรไฟล์ (Profile)</h3>
                                
                                 <hr><br>
-                                <form action="edit_profile" method="post">      
+                                <form action="edit_profile_student" method="post">      
                                             <div class="row">
                                             
                                                 <div class="col-md-12">
                                                     <div class="p-20">
                                                         <div class="form-group">
-                                                            <label>Username (Username) <span style="color:red;">*</span></label>
-                                                            <input type="text" placeholder="" class="form-control" name="username" value="<?php echo $user['username']; ?>" required>
+                                                            <label>ชื่อ (Frist Name) <span style="color:red;">*</span></label>
+                                                            <input type="text" placeholder="" class="form-control" name="first_name" value="<?php echo $user['Frist_name']; ?>" required>
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-12">
                                                     <div class="p-20">
                                                         <div class="form-group">
-                                                            <label>คำนำหน้าชื่อ (Title) <span style="color:red;">*</span></label>
-                                                            <input type="text" placeholder="" class="form-control" name="title" value="<?php echo $user['title']; ?>" required>
+                                                            <label>นามสกุล (Last Name) <span style="color:red;">*</span></label>
+                                                            <input type="text" placeholder="" class="form-control" name="last_name" value="<?php echo $user['last_name']; ?>" required>
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-12">
                                                     <div class="p-20">
                                                         <div class="form-group">
-                                                            <label>ชื่อ (First Name) <span style="color:red;">*</span></label>
-                                                            <input type="text" placeholder="" class="form-control" name="first_name" value="<?php echo $user['first_name']; ?>" required>
+                                                            <label>อีเมล (Email) <span style="color:red;">*</span></label>
+                                                            <input type="text" placeholder="" class="form-control" name="email" value="<?php echo $user['email']; ?>" required>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -75,8 +75,26 @@
                                                 <div class="col-md-12">
                                                     <div class="p-20">
                                                         <div class="form-group">
-                                                            <label>นามสกุล (Last Name) <span style="color:red;">*</span></label>
-                                                            <input type="text" placeholder="" class="form-control" name="last_name" value="<?php echo $user['last_name']; ?>" required>
+                                                            <label>รหัสบัตรประชาชน (Public Code) <span style="color:red;">*</span></label>
+                                                            <input type="text" placeholder="" class="form-control" name="public_code" value="<?php echo $user['Public_code']; ?>" required>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-12">
+                                                    <div class="p-20">
+                                                        <div class="form-group">
+                                                            <label>รหัสนักศึกษา (Code) <span style="color:red;">*</span></label>
+                                                            <input type="text" placeholder="" class="form-control" name="codes" value="<?php echo $user['codes']; ?>" required>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-12">
+                                                    <div class="p-20">
+                                                        <div class="form-group">
+                                                            <label>เบอร์โทรศัพท์ (Tel) <span style="color:red;">*</span></label>
+                                                            <input type="text" placeholder="" class="form-control" name="tel" value="<?php echo $user['tel']; ?>" required>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -86,7 +104,7 @@
                                                 <div class="col-md-12">
                                                     <div class="p-20">
                                                             <button type="submit" class="btn btn-success">บันทึกข้อมูล</button>        
-                                                            <a href="index"><button type="button" class="btn btn-danger">ย้อนกลับ</button></a>
+                                                            <a href="index_student"><button type="button" class="btn btn-danger">ย้อนกลับ</button></a>
                                                             <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#exampleModal">แก้ไขรหัสผ่าน</button>  
                                                     </div>
                                                 </div>
@@ -114,7 +132,7 @@
                                             <span aria-hidden="true">&times;</span>
                                             </button>
                                         </div>
-                                    <form action="edit_password" method="post">   
+                                    <form action="edit_password_student" method="post">   
                                         <div class="modal-body">
                                            
                                             <div class="row">

@@ -6,7 +6,7 @@
                     <div class="col-sm-12">
                         <div class="page-title-box">
                             <div class="btn-group pull-right">
-                                <a href="add_room?type=teacher"><button class="btn btn-success">สร้างห้องเรียน <i class="mdi mdi-book-open-page-variant"></i></button></a>
+                                
                             </div>
                             <h4 class="page-title">ห้องเรียนของฉัน</h4>
                         </div>
