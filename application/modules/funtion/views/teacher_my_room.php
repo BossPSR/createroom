@@ -41,7 +41,7 @@
 
                                 <div class="media">
                                     <img class="d-flex mr-3 rounded-circle img-thumbnail thumb-lg" src="public/assets/images/room.jpg" alt="Generic placeholder image">
-                                    <div class="media-body">
+                                    <div class="media-body" style="position:relative;">
                                             <h5 class="mt-0 font-16 mb-1">ห้อง : <?php echo $room['room']; ?></h5>
                                             <div class="font-16">วิชา : <?php echo $room['subject']; ?></div>
                                             <div class="font-16">เซค : <?php echo $room['sec']; ?></div>
@@ -59,7 +59,9 @@
                                             <a href="delete_room?id=<?php echo $room['id'];?>&type=teacher" onclick="return confirm('ท่านต้องการลบห้องเรียน ?')"><button type="button" class="btn btn-danger" onclick="myDelete()"><i class="fa fa-trash" aria-hidden="true"></i></button></a>
                                             <div style="display:inline-block" data-toggle="modal" data-target="#exampleModal<?php echo $room['id'];?>"><button type="button" class="btn btn-primary"><i class="fa fa-key" aria-hidden="true"></i></button></div>
                                             <a href="file_teacher?id=<?php echo $room['id'];?>&type=teacher"><button type="button" class="btn btn-info"><i class="fa fa-file-archive-o" aria-hidden="true"></i></button></a>
-
+                                            <div style="position:absolute; top:0; right:0;">      
+                                                <a href="box_homework?id=<?php echo $room['id'];?>&type=teacher" style="display: inline-block;"><button type="button" class="btn btn-secondary">การบ้าน <i class="fa fa-archive" aria-hidden="true"></i></button></a>
+                                            </div>
                                             <!-- Modal -->
                                                 <div class="modal fade" id="exampleModal<?php echo $room['id'];?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                 <div class="modal-dialog" role="document">

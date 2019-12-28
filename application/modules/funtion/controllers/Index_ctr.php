@@ -369,11 +369,75 @@ class Index_ctr extends CI_Controller {
           $this->session->set_flashdata('msg','ลบเอกสารประกอบการเรียนไม่สำเร็จ กรุณาลองใหม่อีกครั้ง !!.');
         }
          
-          redirect('file_teacher?id='.$this->input->get('room_id'));
+          redirect('file_teacher?id='.$this->input->post('room_id'));
 
       }else{
         $this->load->view('login');
       }
+    }
+
+    public function box_homework()
+    {
+        if ($this->session->userdata('username') != '')
+        {
+          $teacher = $this->db->get_where('tbl_teacher',['username' => $this->session->userdata('username')])->row();
+          $room = $this->db->get_where('tbl_rooms',['id'=> $this->input->get('id'),'teacher_id' => $teacher->id])->row_array();
+          if (empty($room)) {
+            redirect('index');
+          }
+          $box_home_work = $this->db->get_where('tbl_box_home_work',['room_id'=> $this->input->get('id')])->result_array();
+          $data['room'] = $room;
+          $data['type'] = $this->input->get('type');
+          $data['box_home_work'] = $box_home_work;
+          
+          $this->load->view('option/header'); 
+          $this->load->view('box_homework', $data);
+          $this->load->view('option/footer');
+
+        }else{
+          $this->load->view('login');
+        }
+    }
+
+    public function box_homework_process()
+    {
+        if ($this->session->userdata('username') != '')
+        {
+          $teacher = $this->db->get_where('tbl_teacher',['username' => $this->session->userdata('username')])->row();
+          $room = $this->db->get_where('tbl_rooms',['id'=> $this->input->post('room_id'),'teacher_id' => $teacher->id])->row();
+
+          if (empty($room)) {
+              redirect('index');
+          }
+
+          $data = array(
+            'title'        => $this->input->post('title'),
+            'description'    => $this->input->post('description'),
+            'later_than'     => $this->input->post('date').' '.$this->input->post('time'),
+            'room_id'  => $this->input->post('room_id'),
+            'create_date'  => date('Y-m-d'),
+            'created_at'    => date('Y-m-d H:i:s'),
+            'updated_at'  => date('Y-m-d H:i:s')
+          );
+          $success = $this->db->insert('tbl_box_home_work',$data);
+
+          if($success > 0)
+          {
+            $this->session->set_flashdata('response','ลบเอกสารประกอบการเรียนเรียบร้อยแล้ว');
+          }else{
+
+            $this->session->set_flashdata('msg','ลบเอกสารประกอบการเรียนไม่สำเร็จ กรุณาลองใหม่อีกครั้ง !!.');
+          }
+
+          if ($this->input->post('type') == "teacher") {
+            redirect('box_homework?id='.$this->input->post('room_id').'&type=teacher');
+          }else{
+            redirect('box_homework?id='.$this->input->post('room_id'));
+          }
+          
+        }else{
+          $this->load->view('login');
+        }
     }
 
 }

@@ -105,7 +105,7 @@
                                                                     </div>
                                                                     <div class="form-group">
                                                                         <label>ส่งเมื่อ (Send On)</label>
-                                                                        <div class="form-control"><?php echo date('วันที่ d-m-Y เวลา H:i:s น.',strtotime($home_work['created_at'])); ?></div>
+                                                                        <div class="form-control"><?php echo date('วันที่ d-m-Y เวลา H:i:s น.',strtotime($home_work['send_on'])); ?></div>
                                                                     </div>
                                                                    <hr style="border-top:3px solid rgba(0,0,0,.1)">
                                                                 <?php } ?>

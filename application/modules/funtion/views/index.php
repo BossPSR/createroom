@@ -60,7 +60,7 @@
                                             <div style="display:inline-block" data-toggle="modal" data-target="#exampleModal<?php echo $room['id'];?>"><button type="button" class="btn btn-primary"><i class="fa fa-key" aria-hidden="true"></i></button></div>
                                             <a href="file_teacher?id=<?php echo $room['id'];?>"><button type="button" class="btn btn-info"><i class="fa fa-file-archive-o" aria-hidden="true"></i></button></a>
                                             <div style="position:absolute; top:0; right:0;">      
-                                                <a href="" style="display: inline-block;"><button type="button" class="btn btn-secondary">การบ้าน <i class="fa fa-archive" aria-hidden="true"></i></button></a>
+                                                <a href="box_homework?id=<?php echo $room['id'];?>" style="display: inline-block;"><button type="button" class="btn btn-secondary">การบ้าน <i class="fa fa-archive" aria-hidden="true"></i></button></a>
                                             </div>
                                             <!-- Modal -->
                                                 <div class="modal fade" id="exampleModal<?php echo $room['id'];?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">

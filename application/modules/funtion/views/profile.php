@@ -130,7 +130,7 @@
                                                 <div class="col-md-12">
                                                     <div class="p-20">
                                                         <div class="form-group">
-                                                            <label>รหัสผ่านใหม่ (New Password)) <span style="color:red;">*</span></label>
+                                                            <label>รหัสผ่านใหม่ (New Password) <span style="color:red;">*</span></label>
                                                             <input type="password" placeholder="" class="form-control" name="newpassword" value="" required>
                                                         </div>
                                                     </div>
