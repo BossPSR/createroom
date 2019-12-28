@@ -71,7 +71,7 @@
                                                                     
                                                                     <div class="form-group">
                                                                         <label>คำอธิบาย (Description)</label>
-                                                                        <div class="form-control"><?php echo empty($file['description']) ? "-" : $file['description'] ; ?></div>
+                                                                        <textarea class="form-control" rows="10" readonly><?php echo empty($file['description']) ? "-" : $file['description'] ; ?></textarea>
                                                                     </div>
                                                                     
                                                                 <?php } ?>

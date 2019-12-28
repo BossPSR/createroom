@@ -71,7 +71,7 @@
                                                                     <a href="delete_file_teacher?id=<?php echo $file['id'];?>&room_id=<?php echo $room['id'];?>"  onclick="return confirm('ท่านต้องการลบเอกสารประกอบการเรียน ?')"><button type="button" class="btn btn-danger"><i class="fa fa-trash" aria-hidden="true"></i> ลบเอกสารประกอบการเรียน</button></a>
                                                                     <div class="form-group">
                                                                         <label>คำอธิบาย (Description)</label>
-                                                                        <div class="form-control"><?php echo empty($file['description']) ? "-" : $file['description'] ; ?></div>
+                                                                        <textarea class="form-control" rows="10" readonly><?php echo empty($file['description']) ? "-" : $file['description'] ; ?></textarea>
                                                                     </div>
                                                                     
                                                                 <?php } ?>

@@ -101,7 +101,7 @@
                                                                         <a href="delete_home_work?id=<?php echo $home_work['id'];?>&room_id=<?php echo $home_work['room_id'];?>"  onclick="return confirm('ท่านต้องการลบเอกสารประกอบการเรียน ?')"><button type="button" class="btn btn-danger"><i class="fa fa-trash" aria-hidden="true"></i> ลบเอกสารประกอบการเรียน</button></a>
                                                                     <div class="form-group">
                                                                         <label>คำอธิบาย (Description)</label>
-                                                                        <div class="form-control"><?php echo empty($home_work['description']) ? "-" : $home_work['description']; ?></div>
+                                                                        <textarea class="form-control" rows="10" readonly><?php echo empty($home_work['description']) ? "-" : $home_work['description'] ; ?></textarea>
                                                                     </div>
                                                                     <div class="form-group">
                                                                         <label>ส่งเมื่อ (Send On)</label>
