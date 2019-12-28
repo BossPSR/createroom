@@ -83,6 +83,16 @@
                                                     </div>
                                                 </div>
 
+                                                <div class="col-md-12">
+                                                    <div class="p-20">
+                                                        <div class="form-group">
+                                                            <label>ผู้สอน (Teacher)</label>
+                                                            <?php $teacher = $this->db->get_where('tbl_teacher',['id'=> $room->teacher_id])->row();?>
+                                                            <div class="form-control"><?php echo  $teacher->title.$teacher->first_name.' '.$teacher->last_name;?></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
                                                
                                             </div>
                                              

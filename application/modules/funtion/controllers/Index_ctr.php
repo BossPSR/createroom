@@ -363,10 +363,10 @@ class Index_ctr extends CI_Controller {
 
         if($success > 0)
         {
-          $this->session->set_flashdata('response','ลบห้องเรียนเรียบร้อยแล้ว');
+          $this->session->set_flashdata('response','ลบเอกสารประกอบการเรียนเรียบร้อยแล้ว');
         }else{
 
-          $this->session->set_flashdata('msg','ลบห้องเรียนไม่สำเร็จ กรุณาลองใหม่อีกครั้ง !!.');
+          $this->session->set_flashdata('msg','ลบเอกสารประกอบการเรียนไม่สำเร็จ กรุณาลองใหม่อีกครั้ง !!.');
         }
          
           redirect('file_teacher?id='.$this->input->get('room_id'));

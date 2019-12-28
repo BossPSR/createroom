@@ -48,7 +48,8 @@
                                     <h4>ห้องเรียน : <?php echo $room['room']; ?></h4>
                                     <h4>วิชา : <?php echo $room['subject']; ?></h4>
                                     <h4>เซค : <?php echo $room['sec']; ?></h4>
-                               
+                                    <?php $teacher = $this->db->get_where('tbl_teacher',['id'=> $room['teacher_id']])->row();?>
+                                    <h4>ผู้สอน : <?php echo $teacher->title.$teacher->first_name.' '.$teacher->last_name; ?></h4>
                                 <hr><br>  
                                 <?php 
                                     

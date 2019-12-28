@@ -26,6 +26,27 @@ class Register_ctr extends CI_Controller
           $cpassword     = $this->input->post('password');
           $Public_code      = $this->input->post('Public_code');
           $code_student      = $this->input->post('code_student');
+
+          //เช็ครหัสประชาชนว่าซ้ำกันมั้ย
+          $publicCode = $this->db->get_where('tbl_student',['Public_code'=>$Public_code])->row_array();
+          if (!empty($publicCode)) {
+              $this->session->set_flashdata('msg','รหัสประชาชนนี้มีผู้ใช้ไปแล้ว กรุณาลองใหม่อีกครั้ง!!');
+              redirect('Register');   
+          }
+
+           //เช็ครหัสนักศึกษาว่าซ้ำกันมั้ย
+           $codes = $this->db->get_where('tbl_student',['codes'=>$code_student])->row_array();
+           if (!empty($codes)) {
+               $this->session->set_flashdata('msg','รหัสนักศึกษานี้มีผู้ใช้ไปแล้ว กรุณาลองใหม่อีกครั้ง!!');
+               redirect('Register');   
+           }
+
+            //เช็คอีเมลว่าซ้ำกันมั้ย
+            $emailCheck = $this->db->get_where('tbl_student',['email'=>$email])->row_array();
+            if (!empty($emailCheck)) {
+                $this->session->set_flashdata('msg','อีเมลนี้มีผู้ใช้ไปแล้ว กรุณาลองใหม่อีกครั้ง!!');
+                redirect('Register');   
+            }
         
           if ($password != $cpassword) 
           {

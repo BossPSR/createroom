@@ -49,7 +49,7 @@
                                                 <?php echo date('h:i A',strtotime($room['end_time'])); ?>
                                             </div>
                                             <?php 
-                                                $checkStudent_room = $this->db->get_where('tbl_student_room',['id' => $room['id']])->result_array();
+                                                $checkStudent_room = $this->db->get_where('tbl_student_room',['room_id' => $room['id']])->result_array();
                                                 $numStudent_roon = count($checkStudent_room);
                                                 $number = $room['limit_room'] - $numStudent_roon;
                                                 if ($number <= 0) {

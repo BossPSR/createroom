@@ -51,6 +51,10 @@
                                                         <div class="form-group">
                                                             <label>เวลา (Time) : <?php echo date('h:i A',strtotime($room->start_time)); ?> - <?php echo date('h:i A',strtotime($room->end_time)); ?></label>
                                                         </div>
+                                                        <?php $teacher = $this->db->get_where('tbl_teacher',['id'=> $room->teacher_id])->row();?>
+                                                        <div class="form-group">
+                                                            <label>ผู้สอน (Teacher): <?php echo $teacher->title.$teacher->first_name.' '.$teacher->last_name; ?></label>
+                                                        </div>
                                                     </div>
                                                 </div>
                                                 

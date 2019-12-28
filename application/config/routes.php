@@ -46,3 +46,5 @@ $route['downloadDocument_student'] = 'funtion/Index_Student_ctr/downloadDocument
 $route['learning_student'] = 'funtion/Index_Student_ctr/learning_student'; 
 $route['home_work_student'] = 'funtion/Index_Student_ctr/home_work_student'; 
 $route['home_work_process'] = 'funtion/Index_Student_ctr/home_work_process'; 
+$route['delete_home_work'] = 'funtion/Index_Student_ctr/delete_home_work'; 
+$route['downloadHomework_student'] = 'funtion/Index_Student_ctr/downloadHomework'; 

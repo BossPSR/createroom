@@ -59,7 +59,7 @@
                         </div>
                         <?php endif; ?>
                         <?php if($msg = $this->session->flashdata('msg') ):?>
-                        <div class="alert alert-success alert-dismissable">
+                        <div class="alert alert-danger alert-dismissable">
                             <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
                             <?php echo $msg; ?> <a class="alert-link" href="#"></a>.
                         </div>

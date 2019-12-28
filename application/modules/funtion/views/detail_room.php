@@ -72,13 +72,23 @@
                                                 <div class="col-md-12">
                                                     <div class="p-20">
                                                         <div class="form-group">
-                                                            <label>เวลา (Time) <span style="color:red;">*</span></label>
+                                                            <label>เวลา (Time)</label>
                                                             <div style="display:flex">
                                                                 <div style="width:30%;" class="form-control"><?php echo date('h:i A',strtotime($room->start_time)); ?></div>
                                                                     <div style="justify-content: center;display: flex;align-items: center; font-size:10px; margin: 0 5px;"><i class="fa fa-minus" aria-hidden="true"></i></div>
                                                                 <div style="width:30%;" class="form-control"><?php echo date('h:i A',strtotime($room->end_time)); ?></div>
                                                             </div>
                                                             
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-12">
+                                                    <div class="p-20">
+                                                        <div class="form-group">
+                                                            <label>ผู้สอน (Teacher)</label>
+                                                            <?php $teacher = $this->db->get_where('tbl_teacher',['id'=> $room->teacher_id])->row();?>
+                                                            <div class="form-control"><?php echo  $teacher->title.$teacher->first_name.' '.$teacher->last_name;?></div>
                                                         </div>
                                                     </div>
                                                 </div>

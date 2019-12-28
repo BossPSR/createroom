@@ -286,8 +286,8 @@ class Index_Student_ctr extends CI_Controller {
 		if ($this->session->userdata('email') != '')
         {
 				$student = $this->db->get_where('tbl_student',['email' => $this->session->userdata('email')])->row();
-				$room = $this->db->get_where('tbl_rooms',['id'=> $this->input->post('id'),'teacher_id' => $student->id])->row();
-		
+				$room = $this->db->get_where('tbl_rooms',['id'=> $this->input->post('id')])->row();
+
 				if (empty($room)) {
 					redirect('student_my_room');
 				}
@@ -342,6 +342,64 @@ class Index_Student_ctr extends CI_Controller {
         }else{
             $this->load->view('login');
         }
+	}
+
+	public function delete_home_work()
+	{
+		if ($this->session->userdata('email') != '')
+      {
+        $student = $this->db->get_where('tbl_student',['email' => $this->session->userdata('email')])->row();
+        $room = $this->db->get_where('tbl_rooms',['id'=> $this->input->get('room_id')])->row();
+
+        if (empty($room)) {
+            redirect('index');
+        }
+
+        $deletePath = $this->db->get_where('tbl_home_work',['id'=> $this->input->get('id')])->row_array();
+        if (!empty($deletePath['path'])) {
+          unlink('./'.$deletePath['path'].'/'.$deletePath['file_name']);
+        }
+
+        $this->db->where('id',$this->input->get('id'));
+        $success = $this->db->delete('tbl_home_work');
+
+        if($success > 0)
+        {
+          $this->session->set_flashdata('response','ลบการบ้านเรียนเรียบร้อยแล้ว');
+        }else{
+
+          $this->session->set_flashdata('msg','ลบการบ้านเรียนไม่สำเร็จ กรุณาลองใหม่อีกครั้ง !!.');
+        }
+         
+          redirect('home_work_student?id='.$this->input->get('room_id'));
+
+      }else{
+        $this->load->view('login');
+      }
+	}
+
+	public function downloadHomework()
+    {
+
+      if($this->session->userdata('email') != '')
+      {
+        $id = $this->input->get('id');
+        
+        if (!empty($id)) {
+		  $myFile = $this->db->get_where('tbl_home_work',['id' => $id])->row();
+          if (isset($myFile)) {
+            $this->load->helper('download');
+            force_download(FCPATH.$myFile->path.'/'.$myFile->file_name, null);
+          }
+        }
+        redirect('file_teacher_student');
+			
+      }
+      else
+      {
+      redirect('login');
+      }
+
 	}
 
 }
