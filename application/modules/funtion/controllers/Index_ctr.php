@@ -423,16 +423,84 @@ class Index_ctr extends CI_Controller {
 
           if($success > 0)
           {
-            $this->session->set_flashdata('response','ลบเอกสารประกอบการเรียนเรียบร้อยแล้ว');
+            $this->session->set_flashdata('response','สร้างกล่องส่งการบ้านเรียบร้อยแล้ว');
           }else{
 
-            $this->session->set_flashdata('msg','ลบเอกสารประกอบการเรียนไม่สำเร็จ กรุณาลองใหม่อีกครั้ง !!.');
+            $this->session->set_flashdata('msg','สร้างกล่องส่งการบ้านไม่สำเร็จ กรุณาลองใหม่อีกครั้ง !!.');
           }
 
           if ($this->input->post('type') == "teacher") {
             redirect('box_homework?id='.$this->input->post('room_id').'&type=teacher');
           }else{
             redirect('box_homework?id='.$this->input->post('room_id'));
+          }
+          
+        }else{
+          $this->load->view('login');
+        }
+    }
+
+    public function checkHomework_student()
+    {
+
+      if($this->session->userdata('username') != '')
+      {
+        $id = $this->input->get('id');
+
+        if (!empty($id)) {
+          $myFile = $this->db->get_where('tbl_home_work',['id' => $id])->row();
+          if (isset($myFile)) {
+            $this->load->helper('download');
+            force_download(FCPATH.$myFile->path.'/'.$myFile->file_name, null);
+          }
+        }
+        redirect('box_homework');
+            
+      }
+      else
+      {
+      redirect('login');
+      }
+
+    }
+
+    public function deleteBox_homework()
+    {
+        if ($this->session->userdata('username') != '')
+        {
+          $teacher = $this->db->get_where('tbl_teacher',['username' => $this->session->userdata('username')])->row();
+          $room = $this->db->get_where('tbl_rooms',['id'=> $this->input->get('room_id'),'teacher_id' => $teacher->id])->row();
+
+          if (empty($room)) {
+              redirect('index');
+          }
+
+          $this->db->where('id',$this->input->get('id'));
+          $success = $this->db->delete('tbl_box_home_work');
+
+          if($success > 0)
+          {
+            $this->session->set_flashdata('response','ลบกล่องส่งการบ้านเรียบร้อยแล้ว');
+          }else{
+
+            $this->session->set_flashdata('msg','ลบกล่องส่งการบ้านไม่สำเร็จ กรุณาลองใหม่อีกครั้ง !!.');
+          }
+
+          $deletePath = $this->db->get_where('tbl_home_work',['box_home_work_id'=> $this->input->get('id')])->result_array();
+          foreach ($deletePath as $deletePath) {
+            if (!empty($deletePath['path'])) {
+              unlink('./'.$deletePath['path'].'/'.$deletePath['file_name']);
+            }
+          }
+          
+
+          $this->db->where('box_home_work_id',$this->input->get('id'));
+          $this->db->delete('tbl_home_work');
+
+          if ($this->input->get('type') == "teacher") {
+            redirect('box_homework?id='.$this->input->get('room_id').'&type=teacher');
+          }else{
+            redirect('box_homework?id='.$this->input->get('room_id'));
           }
           
         }else{

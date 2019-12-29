@@ -95,6 +95,14 @@
                                                 <div class="col-md-12">
                                                     <div class="p-20">
                                                         <div class="form-group">
+                                                            <div style="text-align: right;">
+                                                            <?php if(isset($type) && $type == "teacher"){ ?>
+                                                                <a href="deleteBox_homework?id=<?php echo $box_home_work['id']; ?>&room_id=<?php echo $box_home_work['room_id']; ?>&type=teacher"  onclick="return confirm('ท่านต้องการลบกล่องส่งการบ้าน ?')" style="display: inline-block;"><button type="button" class="btn btn-danger"><i class="fa fa-trash" aria-hidden="true"></i> ลบกล่องส่งการบ้าน</button></a>
+                                                            <?php }else{ ?>
+                                                                <a href="deleteBox_homework?id=<?php echo $box_home_work['id']; ?>&room_id=<?php echo $box_home_work['room_id']; ?>"  onclick="return confirm('ท่านต้องการลบกล่องส่งการบ้าน ?')" style="display: inline-block;"><button type="button" class="btn btn-danger"><i class="fa fa-trash" aria-hidden="true"></i> ลบกล่องส่งการบ้าน</button></a>
+                                                            <?php } ?>
+                                                               
+                                                            </div> 
                                                             <div>
                                                                 <h6 style="display:inline-block;">หัวข้อ :</h6><span> <?php echo $box_home_work['title']; ?></span>
                                                             </div>
@@ -123,7 +131,9 @@
                                                     <div class="p-20">
                                                         <div class="form-group">        
                                                             <label><?php echo $student->Frist_name.' '.$student->last_name;  ?></label>
-                                                            <div><button type="button" class="btn btn-info"><i class="fa fa-file-archive-o" aria-hidden="true"></i></button></div>
+                                                            <div>
+                                                                <a href="checkHomework_student?id=<?php echo $homeWorkDetail['id']; ?>" style="display: inline-block;"><button type="button" class="btn btn-info"><i class="fa fa-file-archive-o" aria-hidden="true"></i></button></a>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -137,7 +147,7 @@
                                         </div>
                                         <div class="modal-footer">
                                          
-                                            <button type="button" class="btn btn-danger" data-dismiss="modal">ยกเลิก</button>
+                                            <button type="button" class="btn btn-danger" data-dismiss="modal">ย้อนกลับ</button>
                                             
                                         </div>
 

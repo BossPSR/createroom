@@ -31,7 +31,8 @@ $route['delete_file_teacher'] = 'funtion/Index_ctr/delete_file_teacher';
 $route['teacher_my_room'] = 'funtion/Index_ctr/teacher_my_room'; 
 $route['box_homework'] = 'funtion/Index_ctr/box_homework'; 
 $route['box_homework_process'] = 'funtion/Index_ctr/box_homework_process'; 
-
+$route['checkHomework_student'] = 'funtion/Index_ctr/checkHomework_student';
+$route['deleteBox_homework'] = 'funtion/Index_ctr/deleteBox_homework';
 
 // Student
 $route['Register_complete'] = 'funtion/Register_ctr/regist_complete'; 
