@@ -108,6 +108,8 @@
                                                                     <?php 
                                                                 
                                                                         if (isset($room)) {
+                                                                            $checkHomework_student = $this->db->order_by('id','DESC')->get_where('tbl_home_work' ,['student_id'=>$student->id])->row_array();
+                                                                            if (empty($checkHomework_student)) {
                                                                             
                                                                     ?>
                                                                     <div class="modal-body">
@@ -142,8 +144,56 @@
                                                                     </div>
                                                                    
                                                                     <?php                                                                       
-                                                                      }
-                                                                    ?>
+                                                                      }else{
+                                                                      ?>
+                                                                    <div class="modal-body">
+                                                                    
+                                                                        <div class="row">
+                                                                            
+                                                                            <div class="col-md-12">
+                                                                                <div class="p-20">
+                                                                                    <div class="form-group">
+                                                                                        <label>การบ้าน (Home Work)</label>
+                                                                                        <div>
+                                                                                            <a href="<?php echo site_url('downloadHomework_student?id=').$checkHomework_student['id']; ?>" style="display: inline-block;"><button type="button" class="btn btn-info"><i class="fa fa-file-archive-o" aria-hidden="true"></i></button></a>
+                                                                                            <div style="display:inline-block;">
+                                                                                                <a style="display: inline-block;" href="delete_home_work?id=<?php echo $checkHomework_student['id'];?>&room_id=<?php echo $room->id;?>"  onclick="return confirm('ท่านต้องการลบการบ้าน ?')"><button type="button" class="btn btn-danger"><i class="fa fa-trash" aria-hidden="true"></i></button></a>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="col-md-12">
+                                                                                <div class="p-20">
+                                                                                    <div class="form-group">
+                                                                                        <label>คำอธิบาย (Description)</label>
+                                                                                        <textarea class="form-control" name="description" rows="10" readonly><?php echo  $checkHomework_student['description']; ?></textarea>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+
+                                                                            <div class="col-md-12">
+                                                                                <div class="p-20">
+                                                                                    <div class="form-group">
+                                                                                        <label>คำอธิบาย (Description)</label>
+                                                                                        <div class="form-control"><?php echo date('วันที่ d-m-Y เวลา H:i:s น.',strtotime($checkHomework_student['send_on'])); ?></div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                            
+                                                                        </div>
+                                                                   
+                                                                    </div>
+                                                                    <div class="modal-footer">
+                                                                        
+                                                                        <button type="button" class="btn btn-danger" data-dismiss="modal">ย้อนกลับ</button>
+                                                                        
+                                                                    </div>
+                                                                <?php   
+                                                                      }  
+                                                                   }
+                                                                ?>
                                                                 </form>
                                                                 </div>
                                                             </div>
