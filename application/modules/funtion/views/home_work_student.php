@@ -108,7 +108,7 @@
                                                                     <?php 
                                                                 
                                                                         if (isset($room)) {
-                                                                            $checkHomework_student = $this->db->order_by('id','DESC')->get_where('tbl_home_work' ,['student_id'=>$student->id])->row_array();
+                                                                            $checkHomework_student = $this->db->order_by('id','DESC')->get_where('tbl_home_work' ,['student_id'=>$student->id,'box_home_work_id'=>$box_home_work['id']])->row_array();
                                                                             if (empty($checkHomework_student)) {
                                                                             
                                                                     ?>
