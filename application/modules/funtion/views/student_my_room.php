@@ -62,23 +62,9 @@
                                             <a href="file_teacher_student?id=<?php echo $room['id'];?>"><button type="button" class="btn btn-info"><i class="fa fa-file-archive-o" aria-hidden="true"></i></button></a>
                                             <a href="learning_student?id=<?php echo $room['id'];?>"><button type="button" class="btn btn-primary"><i class="fa fa-video-camera" aria-hidden="true"></i></button></a>
                                             <a href="home_work_student?id=<?php echo $room['id'];?>"><button type="button" class="btn btn-primary"><i class="fa fa-book" aria-hidden="true"></i></button></a>
+                                     
                                         </div>
 
-                                        
-                                        <!-- <ul class="social-links list-inline mb-0">
-                                            <li class="list-inline-item">
-                                                <a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="Facebook"><i class="fa fa-facebook"></i></a>
-                                            </li>
-                                            <li class="list-inline-item">
-                                                <a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="Twitter"><i class="fa fa-twitter"></i></a>
-                                            </li>
-                                            <li class="list-inline-item">
-                                                <a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="1234567890"><i class="fa fa-phone"></i></a>
-                                            </li>
-                                            <li class="list-inline-item">
-                                                <a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="@skypename"><i class="fa fa-skype"></i></a>
-                                            </li>
-                                         -->
 
                                     </div>
                                 </div>

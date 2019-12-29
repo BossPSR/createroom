@@ -271,8 +271,9 @@ class Index_Student_ctr extends CI_Controller {
 		if ($this->session->userdata('email') != '')
         {
 			$student = $this->db->get_where('tbl_student',['email' => $this->session->userdata('email')])->row();
+			$data['student'] = $student;
 			$data['room'] = $this->db->get_where('tbl_rooms',['id'=>$this->input->get('id')])->row();
-			$data['home_work'] = $this->db->get_where('tbl_home_work',['student_id'=>$student->id,'room_id' => $this->input->get('id')])->result_array();
+			$data['box_home_work'] = $this->db->get_where('tbl_box_home_work',['room_id' => $this->input->get('id')])->result_array();
 			$this->load->view('option_student/header_student');
 			$this->load->view('home_work_student',$data);
 			$this->load->view('option_student/footer_student');
@@ -286,7 +287,8 @@ class Index_Student_ctr extends CI_Controller {
 		if ($this->session->userdata('email') != '')
         {
 				$student = $this->db->get_where('tbl_student',['email' => $this->session->userdata('email')])->row();
-				$room = $this->db->get_where('tbl_rooms',['id'=> $this->input->post('id')])->row();
+				$room = $this->db->get_where('tbl_rooms',['id'=> $this->input->post('room_id')])->row();
+				$home_work_id = $this->input->post('home_work_id');
 
 				if (empty($room)) {
 					redirect('student_my_room');
@@ -301,28 +303,32 @@ class Index_Student_ctr extends CI_Controller {
 				$config['max_height'] = '50000';
 		
 				if(!is_dir($config['upload_path']))
-					{
+				{
 						mkdir($config['upload_path'],0777,true);
 				}
+
 			
 				$this->upload->initialize($config);
-				if ($_FILES['file_name']['name']) {
-					if ($this->upload->do_upload('file_name')) {
-						$gamber     = $this->upload->data();
-						$data = array(
-						'student_id'   => $student->id,
-						'room_id'     => $this->input->post('id'),
-						'file_name'   => $gamber['file_name'],
-						'path'        => $path,
-						
-						'description'     => $this->input->post('description'),
-						'create_date' => date('Y-m-d'),
-						'created_at'  => date('Y-m-d H:i:s'),
-						'updated_at'  => date('Y-m-d H:i:s')
-						);
-						$success = $this->db->insert('tbl_home_work',$data);
+			
+					if ($_FILES['file_name']['name']) {
+						if ($this->upload->do_upload('file_name')) {
+							$gamber     = $this->upload->data();
+							$data = array(
+							'student_id'   => $student->id,
+							'room_id'     => $this->input->post('room_id'),
+							'file_name'   => $gamber['file_name'],
+							'path'        => $path,
+							'description' => $this->input->post('description'),
+							'send_on'     => date('Y-m-d H:i:s'),
+							'box_home_work_id' => $home_work_id,
+							'create_date' => date('Y-m-d'),
+							'created_at'  => date('Y-m-d H:i:s'),
+							'updated_at'  => date('Y-m-d H:i:s')
+							);				
+							$success = $this->db->insert('tbl_home_work',$data);		
+						}
+					
 					}
-				}
 		
 				
 		
@@ -335,7 +341,7 @@ class Index_Student_ctr extends CI_Controller {
 		
 				$this->session->set_flashdata('msg','ส่งการบ้านไม่สำเร็จ กรุณาลองใหม่อีกครั้ง !!.');
 				}
-				redirect('home_work_student?id='.$this->input->post('id'));
+				redirect('home_work_student?id='.$this->input->post('room_id'));
 			
 			
 

@@ -132,7 +132,7 @@
                                                         <div class="form-group">        
                                                             <label><?php echo $student->Frist_name.' '.$student->last_name;  ?></label>
                                                             <div>
-                                                                <a href="checkHomework_student?id=<?php echo $homeWorkDetail['id']; ?>" style="display: inline-block;"><button type="button" class="btn btn-info"><i class="fa fa-file-archive-o" aria-hidden="true"></i></button></a>
+                                                                <a href="<?php echo site_url('checkHomework_student?id=').$homeWorkDetail['id']; ?>" style="display: inline-block;"><button type="button" class="btn btn-info"><i class="fa fa-file-archive-o" aria-hidden="true"></i></button></a>
                                                             </div>
                                                         </div>
                                                     </div>
