@@ -87,12 +87,14 @@
 
                                                 <div class="col-md-12">
                                                     <div class="p-20">
-                                                        <div class="form-group">
+                                                        <div>
                                                             <label style="font-size:18px;">การบ้านของฉัน (My Home Work)</label>
                                                             <div>
                                                             <?php foreach ($box_home_work as $box_home_work) { ?>
-                                                                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#HomeWorkModal<?php echo $box_home_work['id']; ?>"><?php echo $box_home_work['title']; ?></button> 
-
+                                                                <div class="form-group" style="display:inline-block;">
+                                                                    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#HomeWorkModal<?php echo $box_home_work['id']; ?>"><?php echo $box_home_work['title']; ?></button> 
+                                                                </div>
+                                                                
                                                                  <!-- Modal -->
                                                                 <div class="modal fade" id="HomeWorkModal<?php echo $box_home_work['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                                 <div class="modal-dialog" role="document">
@@ -110,6 +112,8 @@
                                                                         if (isset($room)) {
                                                                             $checkHomework_student = $this->db->order_by('id','DESC')->get_where('tbl_home_work' ,['student_id'=>$student->id,'box_home_work_id'=>$box_home_work['id']])->row_array();
                                                                             if (empty($checkHomework_student)) {
+                                                                                $timeHomework = strtotime($box_home_work['later_than']); 
+                                                                                $dateToday =  strtotime(date('Y-m-d H:i:s'));
                                                                             
                                                                     ?>
                                                                     <div class="modal-body">
@@ -138,7 +142,11 @@
                                                                    
                                                                     </div>
                                                                     <div class="modal-footer">
-                                                                        <button type="submit" class="btn btn-primary">ส่งการบ้าน</button>
+                                                                        <?php if($dateToday >= $timeHomework){ ?>
+                                                                              <button type="button" onclick="return alert('ไม่สามารถส่งการบ้านได้ เนื่องจากหมดเวลาในการส่งการบ้านแล้ว')" class="btn btn-primary">ส่งการบ้าน</button>
+                                                                        <?php }else{ ?>
+                                                                              <button type="submit" class="btn btn-primary">ส่งการบ้าน</button>
+                                                                        <?php } ?>
                                                                         <button type="button" class="btn btn-danger" data-dismiss="modal">ยกเลิก</button>
                                                                         
                                                                     </div>
@@ -153,17 +161,39 @@
                                                                             <div class="col-md-12">
                                                                                 <div class="p-20">
                                                                                     <div class="form-group">
+                                                                                    
+                                                                                            
+                                                                                            <div style="text-align:center;">
+                                                                                            <?php 
+                                                                                                if ($dateToday >= $timeHomework) {
+                                                                                            ?>
+                                                                                                <button type="button" class="btn btn-danger" onclick="return alert('ไม่สามารถลบการบ้านได้ เนื่องจากหมดเวลาในการส่งการบ้านแล้ว')"><i class="fa fa-trash" aria-hidden="true"></i> ลบการบ้าน</button>
+                                                                                            <?php }else{
+
+                                                                                             ?>
+                                                                                                <a style="display: inline-block;" href="delete_home_work?id=<?php echo $checkHomework_student['id'];?>&room_id=<?php echo $room->id;?>"  onclick="return confirm('ท่านต้องการลบการบ้าน ?')"><button type="button" class="btn btn-danger"><i class="fa fa-trash" aria-hidden="true"></i> ลบการบ้าน</button></a>
+                                                                                            <?php 
+                                                                                                } 
+                                                                                            ?>
+                                                                                            </div>
+                                                                                      
+                                                                                        
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+
+                                                                            <div class="col-md-12">
+                                                                                <div class="p-20">
+                                                                                    <div class="form-group">
                                                                                         <label>การบ้าน (Home Work)</label>
                                                                                         <div>
-                                                                                            <a href="<?php echo site_url('downloadHomework_student?id=').$checkHomework_student['id']; ?>" style="display: inline-block;"><button type="button" class="btn btn-info"><i class="fa fa-file-archive-o" aria-hidden="true"></i></button></a>
-                                                                                            <div style="display:inline-block;">
-                                                                                                <a style="display: inline-block;" href="delete_home_work?id=<?php echo $checkHomework_student['id'];?>&room_id=<?php echo $room->id;?>"  onclick="return confirm('ท่านต้องการลบการบ้าน ?')"><button type="button" class="btn btn-danger"><i class="fa fa-trash" aria-hidden="true"></i></button></a>
-                                                                                            </div>
+                                                                                            <a href="<?php echo site_url('downloadHomework_student?id=').$checkHomework_student['id']; ?>" style="display: inline-block;"><button type="button" class="btn btn-info"><i class="fa fa-file-archive-o" aria-hidden="true"></i></button></a>    
                                                                                         </div>
                                                                                         
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
+
                                                                             <div class="col-md-12">
                                                                                 <div class="p-20">
                                                                                     <div class="form-group">

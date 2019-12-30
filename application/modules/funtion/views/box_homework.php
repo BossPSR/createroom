@@ -95,7 +95,7 @@
                                                 <div class="col-md-12">
                                                     <div class="p-20">
                                                         <div class="form-group">
-                                                            <div style="text-align: right;">
+                                                            <div style="text-align: center;">
                                                             <?php if(isset($type) && $type == "teacher"){ ?>
                                                                 <a href="deleteBox_homework?id=<?php echo $box_home_work['id']; ?>&room_id=<?php echo $box_home_work['room_id']; ?>&type=teacher"  onclick="return confirm('ท่านต้องการลบกล่องส่งการบ้าน ?')" style="display: inline-block;"><button type="button" class="btn btn-danger"><i class="fa fa-trash" aria-hidden="true"></i> ลบกล่องส่งการบ้าน</button></a>
                                                             <?php }else{ ?>
