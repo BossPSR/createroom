@@ -162,10 +162,11 @@
                                                                                 <div class="p-20">
                                                                                     <div class="form-group">
                                                                                     
-                                                                                            
                                                                                             <div style="text-align:center;">
                                                                                             <?php 
-                                                                                                if ($dateToday >= $timeHomework) {
+                                                                                                $timeHomework_onSend = strtotime($box_home_work['later_than']); 
+                                                                                             if ($dateToday >= $timeHomework_onSend) {
+                                                                                                 
                                                                                             ?>
                                                                                                 <button type="button" class="btn btn-danger" onclick="return alert('ไม่สามารถลบการบ้านได้ เนื่องจากหมดเวลาในการส่งการบ้านแล้ว')"><i class="fa fa-trash" aria-hidden="true"></i> ลบการบ้าน</button>
                                                                                             <?php }else{
@@ -206,7 +207,7 @@
                                                                             <div class="col-md-12">
                                                                                 <div class="p-20">
                                                                                     <div class="form-group">
-                                                                                        <label>คำอธิบาย (Description)</label>
+                                                                                        <label>วันที่ส่ง (Date)</label>
                                                                                         <div class="form-control"><?php echo date('วันที่ d-m-Y เวลา H:i:s น.',strtotime($checkHomework_student['send_on'])); ?></div>
                                                                                     </div>
                                                                                 </div>
