@@ -34,6 +34,7 @@
                    <?php foreach ($rooms as $room) { ?>
                    <?php $teacher = $this->db->get_where('tbl_teacher',['id' => $room['teacher_id']])->row();
                          if (isset($teacher)) {
+                        $zoom_id = $this->db->get_where('tbl_zoom',['room_id' => $room['id']])->row_array();  
                     ?>
                     <div class="col-lg-4">
                         <div class="card m-b-30">
@@ -62,6 +63,8 @@
                                             <div style="position:absolute; top:0; right:0;">      
                                                 <a href="box_homework?id=<?php echo $room['id'];?>" style="display: inline-block;"><button type="button" class="btn btn-secondary">การบ้าน <i class="fa fa-archive" aria-hidden="true"></i></button></a>
                                             </div>
+                                            <a href="<?php echo $zoom_id['zoom_url']; ?>" <?php echo ($zoom_id['zoom_url'] ? '$zoom_id['."'zoom_url'".']' : " ");?>><button type="button" class="btn btn-dark"><i class="fa fa-flickr" aria-hidden="true"></i></button></a>
+
                                             <!-- Modal -->
                                                 <div class="modal fade" id="exampleModal<?php echo $room['id'];?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                 <div class="modal-dialog" role="document">
