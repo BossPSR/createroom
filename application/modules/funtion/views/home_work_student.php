@@ -164,6 +164,7 @@
                                                                                     
                                                                                             <div style="text-align:center;">
                                                                                             <?php 
+                                                                                                $dateToday = strtotime(date('Y-m-d H:i:s'));
                                                                                                 $timeHomework_onSend = strtotime($box_home_work['later_than']); 
                                                                                              if ($dateToday >= $timeHomework_onSend) {
                                                                                                  

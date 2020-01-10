@@ -30,7 +30,7 @@ class Login_ctr extends CI_Controller
             $username = $this->input->post('username');
             $password = md5($this->input->post('password'));
             $this->load->model('Login_model');
-            
+            //ของอาจารย์
             if ($this->Login_model->login($username, $password))
             {
                 $user_data = array(
@@ -39,6 +39,7 @@ class Login_ctr extends CI_Controller
                 $this->session->set_userdata($user_data);
                 redirect('Login');
             }
+            //ของนักเรียน
             elseif($this->Login_model->login_student($username, $password)){
                 $user_data = array(
                     'email' => $username

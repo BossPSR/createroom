@@ -20,7 +20,7 @@ class Index_ctr extends CI_Controller {
     }
     return $randomString;
 }
-
+//หน้าแรกของอาจารย์
 	public function index()
 	{
       if ($this->session->userdata('username') != ''){
@@ -39,7 +39,7 @@ class Index_ctr extends CI_Controller {
 		
 
 	}
-
+//สร้างห้อง
 	public function add_room()
 	{
 		if ($this->session->userdata('username') != '')
