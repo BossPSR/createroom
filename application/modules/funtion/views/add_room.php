@@ -37,6 +37,14 @@
                                                 <input type="hidden" name="type" value="<?php echo $type; ?>">
 
                                             <?php } ?>
+                                            <div class="col-md-12">
+                                                    <div class="p-20">
+                                                        <div class="form-group">
+                                                            <label>อีเมล์ (Email) <span style="color:red;">*</span></label>
+                                                            <input type="email" placeholder="" class="form-control" name="email" required>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                                 <div class="col-md-12">
                                                     <div class="p-20">
                                                         <div class="form-group">
