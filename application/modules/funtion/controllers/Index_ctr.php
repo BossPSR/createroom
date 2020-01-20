@@ -38,13 +38,7 @@ class Index_ctr extends CI_Controller
       }else{
           $this->load->view('login');
       }
-      $data['rooms'] = $this->db->order_by('id', 'DESC')->get('tbl_rooms')->result_array();
-      $this->load->view('option/header');
-      $this->load->view('index', $data);
-      $this->load->view('option/footer');
-    } else {
-      $this->load->view('login');
-    }
+     
   }
 
   public function add_room()
