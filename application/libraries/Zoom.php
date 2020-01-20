@@ -5,7 +5,7 @@ class Zoom {
 
     public function create_user($email,$fname,$sname){
         $ch = curl_init("https://api.zoom.us/v2/users");
-        $token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOm51bGwsImlzcyI6Imd0ajVZVDI2UVhHMGxPVFZGdmY0MEEiLCJleHAiOjE1Nzg3MTMyMTAsImlhdCI6MTU3ODYyNjgwOX0.CiVPOatu6nc-fc26mJGW4nD2Dxl6fk1mgZRzJ5knkcc";
+        $token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOm51bGwsImlzcyI6Imd0ajVZVDI2UVhHMGxPVFZGdmY0MEEiLCJleHAiOjE2MzkyNDIwMDAsImlhdCI6MTU3OTUxMDY0OX0.0i1dIPSq4GMLUwQiGmj6eeAUi2YW5WB47n4hRufSdM8";
 
         $payload = json_encode( 
             array( 
@@ -41,7 +41,7 @@ class Zoom {
     }
     public function update_user($zoom_id,$fname,$sname){
         $ch = curl_init("https://api.zoom.us/v2/users/".$zoom_id);
-        $token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOm51bGwsImlzcyI6Imd0ajVZVDI2UVhHMGxPVFZGdmY0MEEiLCJleHAiOjE1Nzg3MTMyMTAsImlhdCI6MTU3ODYyNjgwOX0.CiVPOatu6nc-fc26mJGW4nD2Dxl6fk1mgZRzJ5knkcc";
+        $token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOm51bGwsImlzcyI6Imd0ajVZVDI2UVhHMGxPVFZGdmY0MEEiLCJleHAiOjE2MzkyNDIwMDAsImlhdCI6MTU3OTUxMDY0OX0.0i1dIPSq4GMLUwQiGmj6eeAUi2YW5WB47n4hRufSdM8";
 
         $payload = json_encode( 
             array("first_name"=> $fname,
@@ -75,7 +75,7 @@ class Zoom {
         $duration           = (strtotime($end_time) - strtotime($start_time))/60;
 
         $ch = curl_init("https://api.zoom.us/v2/users/".$zoom_id."/meetings");
-        $token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOm51bGwsImlzcyI6Imd0ajVZVDI2UVhHMGxPVFZGdmY0MEEiLCJleHAiOjE1Nzg3MTMyMTAsImlhdCI6MTU3ODYyNjgwOX0.CiVPOatu6nc-fc26mJGW4nD2Dxl6fk1mgZRzJ5knkcc";
+        $token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOm51bGwsImlzcyI6Imd0ajVZVDI2UVhHMGxPVFZGdmY0MEEiLCJleHAiOjE2MzkyNDIwMDAsImlhdCI6MTU3OTUxMDY0OX0.0i1dIPSq4GMLUwQiGmj6eeAUi2YW5WB47n4hRufSdM8";
 
         $payload = json_encode(
             array(
@@ -115,7 +115,7 @@ class Zoom {
     }
     public function update_meeting($meeting_id,$topic,$description,$start_time,$end_time){
         $ch = curl_init("https://api.zoom.us/v2/meetings/".$meeting_id);
-        $token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOm51bGwsImlzcyI6Imd0ajVZVDI2UVhHMGxPVFZGdmY0MEEiLCJleHAiOjE1Nzg3MTMyMTAsImlhdCI6MTU3ODYyNjgwOX0.CiVPOatu6nc-fc26mJGW4nD2Dxl6fk1mgZRzJ5knkcc";
+        $token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOm51bGwsImlzcyI6Imd0ajVZVDI2UVhHMGxPVFZGdmY0MEEiLCJleHAiOjE2MzkyNDIwMDAsImlhdCI6MTU3OTUxMDY0OX0.0i1dIPSq4GMLUwQiGmj6eeAUi2YW5WB47n4hRufSdM8";
 
         if($topic!='')      $data['topic']       = $topic;
         if($description!='')$data['description'] = $description;
@@ -150,7 +150,7 @@ class Zoom {
     }
     public function get_report(){
         $ch = curl_init("https://api.zoom.us/v2/report/daily");
-        $token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOm51bGwsImlzcyI6Imd0ajVZVDI2UVhHMGxPVFZGdmY0MEEiLCJleHAiOjE1Nzg3MTMyMTAsImlhdCI6MTU3ODYyNjgwOX0.CiVPOatu6nc-fc26mJGW4nD2Dxl6fk1mgZRzJ5knkcc";
+        $token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOm51bGwsImlzcyI6Imd0ajVZVDI2UVhHMGxPVFZGdmY0MEEiLCJleHAiOjE2MzkyNDIwMDAsImlhdCI6MTU3OTUxMDY0OX0.0i1dIPSq4GMLUwQiGmj6eeAUi2YW5WB47n4hRufSdM8";
 
         $data['year']   =2019;
         $data['month']   =8;

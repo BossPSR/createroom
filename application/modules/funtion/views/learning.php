@@ -34,6 +34,7 @@
                                 <?php 
                                     
                                     if (isset($room)) {
+                                        $zoom = $this->db->get_where('tbl_zoom',['room_id'=>$room->id])->row_array();
                                 ?>
                                             <div class="row">
 
@@ -60,7 +61,11 @@
                                                 
                                                 <div class="col-md-6">
                                                     <div class="p-20" style="height: 100%;">
-                                                        <div style="height:100%;background: #000; cursor: pointer;"></div>
+                                                        <a href="<?php echo $zoom['zoom_url'];?>" target="_blank" style="display: inline-block;">
+                                                            <div style="height:100%;background: #000; cursor: pointer;">
+                                                                <img src="public/assets/images/zoom.jpg" alt="" style="max-width: 100%;">
+                                                            </div>
+                                                        </a>
                                                     </div>
                                                 </div>
                                                
