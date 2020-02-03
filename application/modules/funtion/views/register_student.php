@@ -49,7 +49,7 @@
             <div class="card">
                 <div class="card-body">
                     <h4 class="text-muted text-center font-18"><b>สมัครเข้าใช้ระบบ</b></h4>
-
+                    
                     <div class="p-3">
                         <!-- flashdata start-->
                         <?php if($response = $this->session->flashdata('response') ):?>
@@ -64,70 +64,14 @@
                             <?php echo $msg; ?> <a class="alert-link" href="#"></a>.
                         </div>
                         <?php endif; ?>
-
-                        <form class="form-horizontal m-t-20" action="Register_complete" method="POST">
-
-                            <div class="form-group row">
-                                
-                                <div class="col-12">
-                                    <input class="form-control" type="text" placeholder="รหัสประชาชน" name="Public_code" id="Public_code" required>
-                                </div>
-                            </div>
-
-                            <div class="form-group row">
-                                <div class="col-6">
-                                    <input class="form-control" type="text" placeholder="ชื่อ" name="Frist_name" id="Frist_name" required>
-                                </div>
-                                <div class="col-6">
-                                    <input class="form-control" type="text" placeholder="นามสกุล" name="last_name" id="last_name" required>
-                                </div>
-                            </div>
-                          
-                            <div class="form-group row">
-                                <div class="col-12">
-                                    <input class="form-control" type="number" placeholder="รหัสนักศึกษา" name="code_student" id="code_student" required>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <div class="col-6">
-                                    <input class="form-control" type="password" placeholder="รหัสผ่าน" name="password" id="password" required>
-                                </div>
-                                <div class="col-6">
-                                    <input class="form-control" type="password" placeholder="ยืนยันรหัสผ่าน" name="cpassword" id="confirm_password" required>
-                                </div>
-                                <span id="message" style="margin-left: 14px;"></span>
-                            </div>
-                            <div class="form-group row">
-                                <div class="col-12">
-                                    <input class="form-control" type="email" placeholder="อีเมล" name="email" id="email" required>
-                                </div>
-                            </div>
-                             <div class="form-group row">
-                                <div class="col-12">
-                                    <input class="form-control" type="text" placeholder="เบอร์โทร" name="tel" id="tel" required>
-                                </div>
-                            </div>
-
-                            <div class="form-group text-center row m-t-20">
-                                <div class="col-6">
-                                    <button class="btn btn-success btn-block waves-effect waves-light" type="submit">สมัคร</button>
-                                </div>
-                                <div class="col-6">
-                                    <a href="Login"><button class="btn btn-basic btn-block waves-effect waves-light" type="button">เข้าสู่ระบบ</button></a>
-                                </div>
-
-                            </div>   
-                          <!--  <a href=""><div style="text-align: center; font-size: 12px ">สมัครขอรับทุน</div></a>  -->
-                          
-                          <!--   <div class="form-group m-t-10 mb-0 row">
-                                <div class="col-sm-7 m-t-20">
-                                    <a href="pages-recoverpw.html" class="text-muted"><i class="mdi mdi-lock    "></i> Forgot your password?</a>
-                                </div>
-                                <div class="col-sm-5 m-t-20">
-                                    <a href="pages-register.html" class="text-muted"><i class="mdi mdi-account-circle"></i> Create an account</a>
-                                </div>
-                            </div> -->
-                        </form>
+                        <select class="form-control" id="checktype">
+                            <option value="student">สำหรับนักเรียน</option>
+                            <option value="teacher">สำหรับอาจารย์</option>
+                        </select>
+                        <div id="changeForm">
+                        
+                        </div>
+                       
                     </div>
 
                 </div>
@@ -240,6 +184,24 @@
 <!-- App js -->
 <script src="public/assets/js/app.js"></script>
 
+<script type="text/javascript">
+function changeVals() {
+    var checktype = $( "#checktype" ).val();
+
+    if(checktype === "student"){
+        $( "#changeForm" ).html('<?php echo $this->load->view("form_student") ?>');
+    }else if(checktype === "teacher"){
+        $( "#changeForm" ).html('<?php echo $this->load->view("form_teacher") ?>');
+    }
+
+    
+}
+
+$( "select" ).change(changeVals);
+changeVals();
+
+  
+</script>
 
 </body>
 </html>

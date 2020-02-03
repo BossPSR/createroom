@@ -17,6 +17,7 @@ $route['edit_profile'] = 'funtion/Login_ctr/edit_profile';
 $route['edit_password'] = 'funtion/Login_ctr/edit_password'; 
 
 // Teacher
+$route['Register_teacher_complete'] = 'funtion/Register_ctr/register_teacher_complete'; 
 $route['index'] = 'funtion/Index_ctr/index'; 
 $route['add_room'] = 'funtion/Index_ctr/add_room';
 $route['add_room_process'] = 'funtion/Index_ctr/add_room_process';
