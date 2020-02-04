@@ -34,7 +34,7 @@ $route['box_homework'] = 'funtion/Index_ctr/box_homework';
 $route['box_homework_process'] = 'funtion/Index_ctr/box_homework_process'; 
 $route['checkHomework_student'] = 'funtion/Index_ctr/checkHomework_student';
 $route['deleteBox_homework'] = 'funtion/Index_ctr/deleteBox_homework';
-
+$route['point_homework'] = 'funtion/Index_ctr/point_homework';
 // Student
 $route['Register_complete'] = 'funtion/Register_ctr/regist_complete'; 
 $route['Register'] = 'funtion/Register_ctr'; 

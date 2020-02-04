@@ -479,4 +479,11 @@ class Index_ctr extends CI_Controller
       $this->load->view('login');
     }
   }
+
+  public function point_homework()
+  {
+      $id = $this->input->post('id');
+      $point_homework = $this->input->post('point_homework');
+
+  }
 }

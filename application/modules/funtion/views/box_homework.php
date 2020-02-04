@@ -131,12 +131,18 @@
                                                     <div class="p-20">
                                                         <div class="form-group">        
                                                             <label><?php echo $student->Frist_name.' '.$student->last_name;  ?></label>
-                                                            <div>
+                                                            <div style="display: flex;"  id="point_homework">
                                                                 <a href="<?php echo site_url('checkHomework_student?id=').$homeWorkDetail['id']; ?>" style="display: inline-block;"><button type="button" class="btn btn-info"><i class="fa fa-file-archive-o" aria-hidden="true"></i></button></a>
+                                                                
+                                                                    <input type="hidden" name="id" value="<?php echo $homeWorkDetail['id']; ?>">
+                                                                    <input type="number" class="form-control" style="margin-left:5px; margin-right:5px; width:50%;" name="point_homework" value="<?php echo $homeWorkDetail['point_homework']; ?>">
+                                                                    <button type="button" class="btn btn-success" id="send_point">ให้คะแนน</button>
+                                                                
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
+                                               
                                            
                                             <?php } ?> 
                                             </div>
@@ -280,3 +286,25 @@
                                     </div>
                                 </div>
                                 </div>
+
+                                <script type="text/javascript">
+                                    point_homework();          
+                                    function point_homework() {                                                                                                         
+                                        $('#send_point').click(function () {
+                                            let point_homework = $(this).parent().find('input[name="point_homework"]').val();
+                                                            
+                                                                                                        // $.ajax({
+                                                                                                        //         url:'point_homework',
+                                                                                                        //         method: 'POST',
+                                                                                                        //         data:{
+                                                                                                                
+                                                                                                        //         },
+                                                                                                        //         success:function (response) {
+                                                                                                        //             response = JSON.parse(response);
+                                                                                                                
+                                                                                                        //         }
+                                                                                                        // });
+                                            console.log(point_homework);
+                                        });
+                                    }
+                                </script>
