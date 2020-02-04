@@ -484,6 +484,13 @@ class Index_ctr extends CI_Controller
   {
       $id = $this->input->post('id');
       $point_homework = $this->input->post('point_homework');
+      $this->db->where('id',$id);
+      $this->db->update('tbl_home_work',['point_homework' => $point_homework,'updated_at' => date('Y-m-d H:i:s')]);
+
+      $result = [];
+      $result['successfully'] = true;
+      $result['message'] = "add point homework successfully";
+      echo json_encode($result);
 
   }
 }
