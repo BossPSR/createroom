@@ -63,7 +63,7 @@
                                                     <div class="p-20" style="height: 100%;">
                                                         <a href="<?php echo $zoom['zoom_url'];?>" target="_blank" style="display: inline-block;">
                                                             <div style="height:100%;background: #000; cursor: pointer;">
-                                                                <img src="public/assets/images/zoom.jpg" alt="" style="max-width: 100%;">
+                                                                <img src="public/assets/images/zoom.jpg" alt="" style="max-width: 100%;" data-toggle="tooltip" data-placement="bottom" title="เข้าห้องเรียน">
                                                             </div>
                                                         </a>
                                                     </div>
