@@ -189,7 +189,7 @@
                                                                                     <div class="form-group">
                                                                                         <label>การบ้าน (Home Work)</label>
                                                                                         <div>
-                                                                                            <a href="<?php echo site_url('downloadHomework_student?id=').$checkHomework_student['id']; ?>" style="display: inline-block;"><button type="button" class="btn btn-info"><i class="fa fa-file-archive-o" aria-hidden="true"></i></button></a>    
+                                                                                            <a href="<?php echo site_url('downloadHomework_student?id=').$checkHomework_student['id']; ?>" style="display: inline-block;"><button type="button" class="btn btn-info" data-toggle="tooltip" data-placement="bottom" title="การบ้านหัวข้อ <?php echo $box_home_work['title']; ?> ของฉัน"><i class="fa fa-file-archive-o" aria-hidden="true"></i></button></a>    
                                                                                         </div>
                                                                                         
                                                                                     </div>

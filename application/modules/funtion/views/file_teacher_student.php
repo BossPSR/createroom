@@ -67,7 +67,7 @@
                                                                     $nameFile = explode('.',$file['file_name']);
                                                                 ?>
                                                                     <label style="display:block;">เอกสารที่ <?php echo $key.'.'.$nameFile[0]; ?></label>
-                                                                    <a class="form-group" href="<?php echo site_url('downloadDocument_student?id=').$file['id']; ?>" style="display:inline-block ;"><button class="btn btn-info btn-block waves-effect waves-light" type="button"><i class="fa fa-file-pdf-o" aria-hidden="true"></i> <?php echo $file['file_name'];?></button></a>
+                                                                    <a class="form-group" href="<?php echo site_url('downloadDocument_student?id=').$file['id']; ?>" style="display:inline-block ;"><button class="btn btn-info btn-block waves-effect waves-light" type="button" data-toggle="tooltip" data-placement="bottom" title="เอกสารประกอบการเรียน"><i class="fa fa-file-pdf-o" aria-hidden="true"></i> <?php echo $file['file_name'];?></button></a>
                                                                     
                                                                     <div class="form-group">
                                                                         <label>คำอธิบาย (Description)</label>

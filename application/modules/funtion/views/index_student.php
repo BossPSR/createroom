@@ -67,7 +67,7 @@
                                             <div class="mt-0 font-16 mb-1">ผู้สอน : <?php echo $teacher['title'].$teacher['first_name'].' '.$teacher['last_name']; ?></div>
                                             
                                         <div>
-                                            <a href="detail_room_student?id=<?php echo $room['id'];?>"><button type="button" class="btn btn-success"><i class="fa fa-file-text" aria-hidden="true"></i></button></a>
+                                            <a href="detail_room_student?id=<?php echo $room['id'];?>"><button type="button" class="btn btn-success" data-toggle="tooltip" data-placement="bottom" title="รายละเอียดห้องเรียน"><i class="fa fa-file-text" aria-hidden="true"></i></button></a>
                                             <?php 
                                                 $student_room = $this->db->get_where('tbl_student_room',['student_id' => $user->id,'room_id' => $room['id']])->row_array();
                                                 if (empty($student_room)) {
@@ -78,7 +78,7 @@
                                             <?php 
                                                     }else{
                                             ?>
-                                                <div style="display:inline-block" data-toggle="modal" data-target="#exampleModal<?php echo $room['id'];?>"><button type="button" class="btn btn-primary"><i class="fa fa-key" aria-hidden="true"></i></button></div>
+                                                <div style="display:inline-block" data-toggle="modal" data-target="#exampleModal<?php echo $room['id'];?>"><button type="button" class="btn btn-primary" data-toggle="tooltip" data-placement="bottom" title="รหัสเข้าห้องเรียน"><i class="fa fa-key" aria-hidden="true"></i></button></div>
                                             <?php   
                                                     }
                                                 }

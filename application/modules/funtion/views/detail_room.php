@@ -28,7 +28,7 @@
                         <div class="card m-b-30">
                             <div class="card-body">
                                
-                                    <h3>รายเอียดห้องเรียน (Room Detail)</h3>
+                                    <h3>รายละเอียดห้องเรียน (Room Detail)</h3>
                                
                                 <hr><br>  
                                 <?php 

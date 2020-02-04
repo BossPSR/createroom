@@ -54,16 +54,16 @@
                                             <div class="mt-0 font-16 mb-1">ผู้สอน : <?php echo $teacher->title.$teacher->first_name.' '.$teacher->last_name; ?></div>
                                             
                                         <div>
-                                            <a href="detail_room?id=<?php echo $room['id'];?>"><button type="button" class="btn btn-success"><i class="fa fa-file-text" aria-hidden="true"></i></button></a>
+                                            <a href="detail_room?id=<?php echo $room['id'];?>"><button type="button" class="btn btn-success" data-toggle="tooltip" data-placement="bottom" title="รายละเอียดห้องเรียน"><i class="fa fa-file-text" aria-hidden="true"></i></button></a>
                                             <?php if ($room['teacher_id'] == $user->id) { ?>
-                                            <a href="edit_room?id=<?php echo $room['id'];?>"><button type="button" class="btn btn-warning"><i class="fa fa-pencil-square" aria-hidden="true"></i></button></a>
-                                            <a href="delete_room?id=<?php echo $room['id'];?>" onclick="return confirm('ท่านต้องการลบห้องเรียน ?')"><button type="button" class="btn btn-danger" onclick="myDelete()"><i class="fa fa-trash" aria-hidden="true"></i></button></a>
-                                            <div style="display:inline-block" data-toggle="modal" data-target="#exampleModal<?php echo $room['id'];?>"><button type="button" class="btn btn-primary"><i class="fa fa-key" aria-hidden="true"></i></button></div>
-                                            <a href="file_teacher?id=<?php echo $room['id'];?>"><button type="button" class="btn btn-info"><i class="fa fa-file-archive-o" aria-hidden="true"></i></button></a>
+                                            <a href="edit_room?id=<?php echo $room['id'];?>"><button type="button" class="btn btn-warning" data-toggle="tooltip" data-placement="bottom" title="แก้ไขห้องเรียน"><i class="fa fa-pencil-square" aria-hidden="true"></i></button></a>
+                                            <a href="delete_room?id=<?php echo $room['id'];?>" onclick="return confirm('ท่านต้องการลบห้องเรียน ?')"><button type="button" class="btn btn-danger" onclick="myDelete()" data-toggle="tooltip" data-placement="bottom" title="ลบห้องเรียน"><i class="fa fa-trash" aria-hidden="true"></i></button></a>
+                                            <div style="display:inline-block" data-toggle="modal" data-target="#exampleModal<?php echo $room['id'];?>"><button type="button" class="btn btn-primary" data-toggle="tooltip" data-placement="bottom" title="รหัสเข้าห้องเรียน"><i class="fa fa-key" aria-hidden="true"></i></button></div>
+                                            <a href="file_teacher?id=<?php echo $room['id'];?>"><button type="button" class="btn btn-info" data-toggle="tooltip" data-placement="bottom" title="เอกสารประกอบการเรียน"><i class="fa fa-file-archive-o" aria-hidden="true"></i></button></a>
                                             <div style="position:absolute; top:0; right:0;">      
-                                                <a href="box_homework?id=<?php echo $room['id'];?>" style="display: inline-block;"><button type="button" class="btn btn-secondary">การบ้าน <i class="fa fa-archive" aria-hidden="true"></i></button></a>
+                                                <a href="box_homework?id=<?php echo $room['id'];?>" style="display: inline-block;"><button type="button" class="btn btn-secondary" data-toggle="tooltip" data-placement="bottom" title="กล่องส่งการบ้าน">การบ้าน <i class="fa fa-archive" aria-hidden="true"></i></button></a>
                                             </div>
-                                            <a href="<?php echo $zoom_id['zoom_url']; ?>" target="_blank" <?php echo ($zoom_id['zoom_url'] ? '$zoom_id['."'zoom_url'".']' : " ");?>><button type="button" class="btn btn-dark"><i class="fa fa-flickr" aria-hidden="true"></i></button></a>
+                                            <a href="<?php echo $zoom_id['zoom_url']; ?>" target="_blank" <?php echo ($zoom_id['zoom_url'] ? '$zoom_id['."'zoom_url'".']' : " ");?>><button type="button" class="btn btn-dark" data-toggle="tooltip" data-placement="bottom" title="เข้าห้องเรียน"><i class="fa fa-flickr" aria-hidden="true"></i></button></a>
 
                                             <!-- Modal -->
                                                 <div class="modal fade" id="exampleModal<?php echo $room['id'];?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">

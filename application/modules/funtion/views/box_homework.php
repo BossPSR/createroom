@@ -132,7 +132,7 @@
                                                         <div class="form-group">        
                                                             <label><?php echo $student->Frist_name.' '.$student->last_name;  ?></label>
                                                             <div style="display: flex; margin-bottom:5px;">
-                                                                <a href="<?php echo site_url('checkHomework_student?id=').$homeWorkDetail['id']; ?>" style="display: inline-block;"><button type="button" class="btn btn-info"><i class="fa fa-file-archive-o" aria-hidden="true"></i></button></a>
+                                                                <a href="<?php echo site_url('checkHomework_student?id=').$homeWorkDetail['id']; ?>" style="display: inline-block;"><button type="button" class="btn btn-info" data-toggle="tooltip" data-placement="bottom" title="การบ้านของ <?php echo $student->Frist_name.' '.$student->last_name;  ?>"><i class="fa fa-file-archive-o" aria-hidden="true"></i></button></a>
 
                                                                     <input type="number" class="form-control" id="point<?php echo $homeWorkDetail['id']; ?>" style="margin-left:5px; margin-right:5px; width:50%;" name="point_homework" value="<?php echo $homeWorkDetail['point_homework']; ?>">
                                                                     <button type="button" class="btn btn-success" id="send_point" onclick="point_homework(document.getElementById('point<?php echo $homeWorkDetail['id']; ?>').value,<?php echo $homeWorkDetail['id']; ?>)" >ให้คะแนน</button>
