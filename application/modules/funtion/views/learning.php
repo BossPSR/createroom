@@ -61,9 +61,10 @@
                                                 
                                                 <div class="col-md-6">
                                                     <div class="p-20" style="height: 100%;">
-                                                        <a href="<?php echo $zoom['zoom_url'];?>" target="_blank" style="display: inline-block;">
-                                                            <div style="height:100%;background: #000; cursor: pointer;">
-                                                                <img src="public/assets/images/zoom.jpg" alt="" style="max-width: 100%;" data-toggle="tooltip" data-placement="bottom" title="เข้าห้องเรียน">
+                                                        <!-- <a href="<?php echo $zoom['zoom_url'];?>" target="_blank" style="display: inline-block;"> -->
+                                                        <a href="<?php echo $teacher->google_hangouts;?>" target="_blank" style="display: inline-block;">
+                                                            <div style="height:100%;background: #000; cursor: pointer; border: 3px solid #000;">
+                                                                <img src="public/assets/images/google-hangouts.jpg" alt="" style="max-width: 100%;" data-toggle="tooltip" data-placement="bottom" title="เข้าห้องเรียน">
                                                             </div>
                                                         </a>
                                                     </div>

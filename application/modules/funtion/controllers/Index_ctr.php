@@ -493,4 +493,30 @@ class Index_ctr extends CI_Controller
       echo json_encode($result);
 
   }
+
+  public function google_hangouts_success()
+	{
+		$teacher_id = $this->input->post('teacher_id');
+		$google_hangouts = $this->input->post('google_hangouts');
+		$type = $this->input->post('type');
+		$this->db->where('id',$teacher_id);
+		$success = $this->db->update('tbl_teacher',['google_hangouts' => $google_hangouts]);
+
+		if($success > 0)
+        {
+          $this->session->set_flashdata('response','สร้างห้องเรียนเรียบร้อยแล้ว');
+        }else{
+
+          $this->session->set_flashdata('msg','สร้างห้องเรียนไม่สำเร็จ กรุณาลองใหม่อีกครั้ง !!.');
+        }
+		
+		if ($type == "index") {
+			redirect('index');
+		}
+		
+		if ($type == "teacher_my_room") {
+			redirect('teacher_my_room');
+		}
+		
+	}
 }
