@@ -213,6 +213,15 @@
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
+
+                                                                            <div class="col-md-12">
+                                                                                <div class="p-20">
+                                                                                    <div class="form-group">
+                                                                                        <label>คะแนนที่ได้ (My Point)</label>
+                                                                                        <div class="form-control"><?php echo $checkHomework_student['point_homework'] == null || $checkHomework_student['point_homework'] == "" ? '-': $checkHomework_student['point_homework']; ?></div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
                                                                             
                                                                         </div>
                                                                    
