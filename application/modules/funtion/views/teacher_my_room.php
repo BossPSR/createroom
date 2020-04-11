@@ -64,7 +64,7 @@
                                                 <a href="box_homework?id=<?php echo $room['id'];?>&type=teacher" style="display: inline-block;"><button type="button" class="btn btn-secondary" data-toggle="tooltip" data-placement="bottom" title="กล่องส่งการบ้าน">การบ้าน <i class="fa fa-archive" aria-hidden="true"></i></button></a>
                                             </div>
                                             <!-- <a href="<?php echo $zoom_id['zoom_url']; ?>" target="_blank" <?php echo ($zoom_id['zoom_url'] ? '$zoom_id['."'zoom_url'".']' : " ");?>><button type="button" class="btn btn-dark" data-toggle="tooltip" data-placement="bottom" title="เข้าห้องเรียน"><i class="fa fa-flickr" aria-hidden="true"></i></button></a> -->
-                                            <div style="display:inline-block" data-toggle="modal" data-target="#exampleModalMeeting<?php echo $room['id'];?>"><button type="button" class="btn btn-dark" data-toggle="tooltip" data-placement="bottom" title="สร้างห้องเรียน"><i class="fa fa-flickr" aria-hidden="true"></i></button></div>
+                                            <div style="display:inline-block" data-toggle="modal" data-target="#exampleModalMeeting<?php echo $room['id'];?>"><button type="button" class="btn btn-dark" data-toggle="tooltip" data-placement="bottom" title="การประชุมวิดีโอ"><i class="fa fa-video-camera" aria-hidden="true"></i></button></div>
                                             <!-- Modal -->
                                                 <div class="modal fade" id="exampleModal<?php echo $room['id'];?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                 <div class="modal-dialog" role="document">

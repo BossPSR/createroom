@@ -60,7 +60,7 @@
                                         <div>
                                             <a href="detail_room_student?id=<?php echo $room['id'];?>&type=student"><button type="button" class="btn btn-success" data-toggle="tooltip" data-placement="bottom" title="รายละเอียดห้องเรียน"><i class="fa fa-file-text" aria-hidden="true"></i></button></a>
                                             <a href="file_teacher_student?id=<?php echo $room['id'];?>"><button type="button" class="btn btn-info" data-toggle="tooltip" data-placement="bottom" title="เอกสารประกอบการเรียน"><i class="fa fa-file-archive-o" aria-hidden="true"></i></button></a>
-                                            <a href="learning_student?id=<?php echo $room['id'];?>"><button type="button" class="btn btn-primary" data-toggle="tooltip" data-placement="bottom" title="เข้าห้องเรียน"><i class="fa fa-video-camera" aria-hidden="true"></i></button></a>
+                                            <a href="learning_student?id=<?php echo $room['id'];?>"><button type="button" class="btn btn-primary" data-toggle="tooltip" data-placement="bottom" title="การประชุมวิดีโอ"><i class="fa fa-video-camera" aria-hidden="true"></i></button></a>
                                             <a href="home_work_student?id=<?php echo $room['id'];?>"><button type="button" class="btn btn-primary" data-toggle="tooltip" data-placement="bottom" title="ส่งการบ้าน"><i class="fa fa-book" aria-hidden="true"></i></button></a>
                                      
                                         </div>

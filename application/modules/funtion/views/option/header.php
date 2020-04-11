@@ -38,7 +38,7 @@
                         <!--Upcube-->
                         <!--</a>-->
                         <!-- Image Logo -->
-                        <a href="index" class="logo">
+                        <a href="index" class="logo" style="line-height:70px;">
                             <img src="public/assets/images/logo-sm.png" alt="" height="22" class="logo-small">
                             <img src="public/assets/images/logo.png" alt="" height="24" class="logo-large">
                         </a>
@@ -53,13 +53,16 @@
 
                         <ul class="list-inline float-right mb-0">
                             
-                           
+                            <?php $user = $this->db->get_where('tbl_teacher',['username' => $this->session->userdata('username')])->row(); ?>
                             <!-- User-->
-                            <li class="list-inline-item dropdown notification-list">
+                            <li class="list-inline-item dropdown notification-list text-center">
                                 <a class="nav-link dropdown-toggle arrow-none waves-effect nav-user" data-toggle="dropdown" href="#" role="button"
                                    aria-haspopup="false" aria-expanded="false">
                                     <img src="public/assets/images/user_logo.jpg" alt="user" class="rounded-circle" data-toggle="tooltip" data-placement="bottom" title="โปรไฟล์ของฉัน">
                                 </a>
+                                <div style="color: rgba(255, 255, 255, 0.7);">
+                                    <span><?php echo $user->title.$user->first_name." ".$user->last_name; ?></span>
+                                </div>
                                 <div class="dropdown-menu dropdown-menu-right profile-dropdown ">
                                     <a class="dropdown-item" href="profile"><i class="dripicons-user text-muted"></i> Profile</a>
                                     <div class="dropdown-divider"></div>
