@@ -44,9 +44,16 @@
                                     <h3>โปรไฟล์ (Profile)</h3>
                                
                                 <hr><br>
-                                <form action="edit_profile_student" method="post">      
+                                <form action="edit_profile_student" method="post" enctype="multipart/form-data">      
                                             <div class="row">
-                                            
+                                                <div class="col-md-12">
+                                                    <input type="file" class="form-control form-group" name="file_name" onchange="readURL(this);">
+                                                    <?php if(isset($user['path']) && isset($user['file_name'])){ ?>
+                                                    <img style="width:30%; margin-bottom:15px;" id="blah" src="<?php echo $user['path'].'/'.$user['file_name'];  ?>">
+                                                    <?php }else{ ?>
+                                                        <img style="width:30%; margin-bottom:15px;" id="blah">
+                                                    <?php } ?>
+                                                </div>
                                                 <div class="col-md-12">
                                                     <div class="p-20">
                                                         <div class="form-group">
@@ -184,3 +191,17 @@
                                 </div>
                                 </div>
                                
+                                <script>
+    function readURL(input) {
+            if (input.files && input.files[0]) {
+
+                var reader = new FileReader();
+
+                reader.onload = function(e) {
+                    $('#blah').attr('src', e.target.result);
+                }
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+</script>

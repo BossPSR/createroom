@@ -8,6 +8,7 @@ class Login_ctr extends CI_Controller
     {
         parent::__construct();
         $this->load->model('Login_model');
+        $this->load->library('upload');
     }
 
     public function login()
@@ -95,6 +96,27 @@ class Login_ctr extends CI_Controller
             );
             $this->db->where('id',$teacher->id);
             $success = $this->db->update('tbl_teacher',$data);
+
+            if ($_FILES['file_name']['name']) {
+				$path = 'uploads/profile/teacher/'.strtotime(date('Y-m-d H:i:s'));
+				$config['upload_path'] = $path;
+				$config['allowed_types'] = '*';
+				$config['max_size']     = '200480';
+				$config['max_width'] = '50000';
+				$config['max_height'] = '50000';
+			
+				if(!is_dir($config['upload_path']))
+				{
+					mkdir($config['upload_path'],0777,true);
+				}
+				$this->upload->initialize($config);
+				if ($this->upload->do_upload('file_name')) {
+					$gamber = $this->upload->data();
+					$this->db->where('id',$teacher->id);
+					$this->db->update('tbl_teacher',['file_name' => $gamber['file_name'],'path' => $path]);
+				}
+
+			}
     
             if($success > 0)
             {

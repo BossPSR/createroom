@@ -7,6 +7,7 @@ class Register_ctr extends CI_Controller
     public function __construct()
     {
         parent::__construct();
+        $this->load->library('upload');
     }
 
     public function index()
@@ -15,9 +16,8 @@ class Register_ctr extends CI_Controller
         $this->load->view('register_student');
     }
 
-    function regist_complete()
+    public function regist_complete()
     {
-           
           $fname         = $this->input->post('Frist_name');
           $lname         = $this->input->post('last_name');
           $tel           = $this->input->post('tel');
@@ -26,6 +26,22 @@ class Register_ctr extends CI_Controller
           $cpassword     = $this->input->post('cpassword');
           $Public_code      = $this->input->post('Public_code');
           $code_student      = $this->input->post('code_student');
+
+          
+          $path = 'uploads/profile/student/'.strtotime(date('Y-m-d H:i:s'));
+          $config['upload_path'] = $path;
+          $config['allowed_types'] = '*';
+          $config['max_size']     = '200480';
+          $config['max_width'] = '50000';
+          $config['max_height'] = '50000';
+      
+          if(!is_dir($config['upload_path']))
+          {
+              mkdir($config['upload_path'],0777,true);
+          }
+  
+        
+          $this->upload->initialize($config);
 
           //เช็ครหัสประชาชนว่าซ้ำกันมั้ย
           $publicCode = $this->db->get_where('tbl_student',['Public_code'=>$Public_code])->row_array();
@@ -55,34 +71,42 @@ class Register_ctr extends CI_Controller
           }
           else
           {
-              $data = array
-              (
-                'Frist_name'    => $fname,
-                'last_name'     => $lname,
-                'tel'           => $tel,
-                'email'         => $email,
-                'Public_code'   => $Public_code,
-                'codes'         => $code_student,
-                'password'      => md5($cpassword)
-              );
+            if ($_FILES['file_name']['name']) {
+                if ($this->upload->do_upload('file_name')) {
+                $gamber     = $this->upload->data();
+                $data = array(
+                  'Frist_name'    => $fname,
+                  'last_name'     => $lname,
+                  'tel'           => $tel,
+                  'email'         => $email,
+                  'Public_code'   => $Public_code,
+                  'codes'         => $code_student,
+                  'password'      => md5($cpassword),
+                  'file_name'   => $gamber['file_name'],
+                  'path'        => $path,
+                );
+                $succeed =  $this->db->insert('tbl_student',$data);
+  
+                if($succeed > 0)
+                {
+                  $this->session->set_flashdata('response','บันทึกข้อมูลสมาชิกเรียบร้อยแล้ว/กรุณาเข้าสู่ระบบ!!');
+                }
+                else
+                {
+                  $this->session->set_flashdata('msg','เกิดข้อผิดพลาดในการสมัคร กรุณาลองใหม่อีกครั้ง!!');
+                }
+
+              }
+            }
               
   
-              $succeed =  $this->db->insert('tbl_student',$data);
-  
-              if($succeed > 0)
-              {
-                $this->session->set_flashdata('response','บันทึกข้อมูลสมาชิกเรียบร้อยแล้ว/กรุณาเข้าสู่ระบบ!!');
-              }
-              else
-              {
-                $this->session->set_flashdata('msg','เกิดข้อผิดพลาดในการสมัคร กรุณาลองใหม่อีกครั้ง!!');
-              }
+              
               redirect('Login');
           }
            
       }
 
-      function register_teacher_complete()
+      public  function register_teacher_complete()
     {
           $title           = $this->input->post('title'); 
           $fname         = $this->input->post('Frist_name');
@@ -92,6 +116,21 @@ class Register_ctr extends CI_Controller
           $password      = $this->input->post('password');
           $cpassword     = $this->input->post('cpassword');
           
+         
+          $path = 'uploads/profile/teacher/'.strtotime(date('Y-m-d H:i:s'));
+          $config['upload_path'] = $path;
+          $config['allowed_types'] = '*';
+          $config['max_size']     = '200480';
+          $config['max_width'] = '50000';
+          $config['max_height'] = '50000';
+      
+          if(!is_dir($config['upload_path']))
+          {
+              mkdir($config['upload_path'],0777,true);
+          }
+  
+        
+          $this->upload->initialize($config);
 
           //เช็ครหัสผู้ใช้ว่าซ้ำกันมั้ย
           $checkUsername = $this->db->get_where('tbl_teacher',['username'=>$username])->row_array();
@@ -114,30 +153,37 @@ class Register_ctr extends CI_Controller
           }
           else
           {
-              $data = array
-              (
-                'title'         => $title,
-                'first_name'    => $fname,
-                'last_name'     => $lname,
-                'username'      => $username,
-                'email'         => $email,
-                'password'      => md5($cpassword),
-                'create_date'   => date('Y-m-d'),
-                'created_at'    => date('Y-m-d H:i:s'),
-                'updated_at'    => date('Y-m-d H:i:s')
-              );
+            if ($_FILES['file_name']['name']) {
+              if ($this->upload->do_upload('file_name')) {
+                $gamber = $this->upload->data();
+                $data = array(
+                  'title'         => $title,
+                  'first_name'    => $fname,
+                  'last_name'     => $lname,
+                  'username'      => $username,
+                  'email'         => $email,
+                  'password'      => md5($cpassword),
+                  'file_name'   => $gamber['file_name'],
+                  'path'        => $path,
+                  'create_date'   => date('Y-m-d'),
+                  'created_at'    => date('Y-m-d H:i:s'),
+                  'updated_at'    => date('Y-m-d H:i:s'),
+                );
+                $succeed =  $this->db->insert('tbl_teacher',$data);
+  
+                if($succeed > 0)
+                {
+                  $this->session->set_flashdata('response','บันทึกข้อมูลสมาชิกเรียบร้อยแล้ว/กรุณาเข้าสู่ระบบ!!');
+                }
+                else
+                {
+                  $this->session->set_flashdata('msg','เกิดข้อผิดพลาดในการสมัคร กรุณาลองใหม่อีกครั้ง!!');
+                }
+              }
+            }
               
   
-              $succeed =  $this->db->insert('tbl_teacher',$data);
-  
-              if($succeed > 0)
-              {
-                $this->session->set_flashdata('response','บันทึกข้อมูลสมาชิกเรียบร้อยแล้ว/กรุณาเข้าสู่ระบบ!!');
-              }
-              else
-              {
-                $this->session->set_flashdata('msg','เกิดข้อผิดพลาดในการสมัคร กรุณาลองใหม่อีกครั้ง!!');
-              }
+             
               redirect('Login');
           }
            

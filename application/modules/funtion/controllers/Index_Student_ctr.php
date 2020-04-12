@@ -6,7 +6,7 @@ class Index_Student_ctr extends CI_Controller {
 	public function __construct()
   	{
 		parent::__construct();
-		
+		$this->load->library('upload');
 	}
 
 	public function index_student()
@@ -86,7 +86,28 @@ class Index_Student_ctr extends CI_Controller {
 			  'codes'  => $this->input->post('codes')
             );
             $this->db->where('id',$student->id);
-            $success = $this->db->update('tbl_student',$data);
+			$success = $this->db->update('tbl_student',$data);
+			
+			if ($_FILES['file_name']['name']) {
+				$path = 'uploads/profile/student/'.strtotime(date('Y-m-d H:i:s'));
+				$config['upload_path'] = $path;
+				$config['allowed_types'] = '*';
+				$config['max_size']     = '200480';
+				$config['max_width'] = '50000';
+				$config['max_height'] = '50000';
+			
+				if(!is_dir($config['upload_path']))
+				{
+					mkdir($config['upload_path'],0777,true);
+				}
+				$this->upload->initialize($config);
+				if ($this->upload->do_upload('file_name')) {
+					$gamber = $this->upload->data();
+					$this->db->where('id',$student->id);
+					$this->db->update('tbl_student',['file_name' => $gamber['file_name'],'path' => $path]);
+				}
+
+			}
     
             if($success > 0)
             {

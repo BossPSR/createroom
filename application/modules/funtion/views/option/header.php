@@ -58,7 +58,11 @@
                             <li class="list-inline-item dropdown notification-list text-center">
                                 <a class="nav-link dropdown-toggle arrow-none waves-effect nav-user" data-toggle="dropdown" href="#" role="button"
                                    aria-haspopup="false" aria-expanded="false">
-                                    <img src="public/assets/images/user_logo.jpg" alt="user" class="rounded-circle" data-toggle="tooltip" data-placement="bottom" title="โปรไฟล์ของฉัน">
+                                   <?php if(isset($user->path) && isset($user->file_name)){ ?>
+                                   <img src="<?php echo $user->path.'/'.$user->file_name;  ?>" alt="user" class="rounded-circle" data-toggle="tooltip" data-placement="bottom" title="โปรไฟล์ของฉัน">
+                                   <?php }else{ ?>
+                                   <img src="public/assets/images/user_logo.jpg" alt="user" class="rounded-circle" data-toggle="tooltip" data-placement="bottom" title="โปรไฟล์ของฉัน">
+                                   <?php } ?>
                                 </a>
                                 <div style="color: rgba(255, 255, 255, 0.7);">
                                     <span><?php echo $user->title.$user->first_name." ".$user->last_name; ?></span>
