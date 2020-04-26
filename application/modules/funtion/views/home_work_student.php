@@ -117,13 +117,26 @@
                                                                             
                                                                     ?>
                                                                     <div class="modal-body">
+                                                                    <div class="row">
+                                                                           
+                                                                            <div class="col-md-12">
+                                                                                <div class="p-20">
+                                                                                    <div class="form-group">
+                                                                                        <label>คำอธิบายเกี่ยวกับการบ้าน</label>
+                                                                                        <textarea class="form-control" rows="5" disabled><?php echo $box_home_work['description']; ?></textarea>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+
                                                                     
+                                                                            
+                                                                    </div>
                                                                     <input type="hidden" name="room_id" value="<?php echo $room->id; ?>">  
                                                                         <div class="row">
                                                                             <div class="col-md-12">
                                                                                 <div class="p-20">
                                                                                     <div class="form-group">
-                                                                                        <label>การบ้าน (Home Work) <span style="color:red;">*</span></label>
+                                                                                        <label>การบ้าน (Home Work) <span style="color:red;">** ขนาดไม่เกิน 200 MB **</span></label>
                                                                                         <input type="file" placeholder="" class="form-control" name="file_name" required>
                                                                                         
                                                                                     </div>
@@ -134,6 +147,15 @@
                                                                                     <div class="form-group">
                                                                                         <label>คำอธิบาย (Description) <span style="color:red;">* หากไม่มีให้ใส่ - *</span></label>
                                                                                         <textarea class="form-control" name="description" rows="10" required></textarea>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+
+                                                                            <div class="col-md-12">
+                                                                                <div class="p-20">
+                                                                                    <div class="form-group">
+                                                                                        <label><span style="color:red;">** ส่งก่อน (No Later Than) **</span></label>
+                                                                                        <div class="form-control"><?php echo date('วันที่ d-m-Y เวลา H:i:s น.',strtotime($box_home_work['later_than'])); ?></div>
                                                                                     </div>
                                                                                 </div>
                                                                             </div>

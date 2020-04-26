@@ -39,7 +39,7 @@
                     <div class="col-lg-4">
                         <div class="card m-b-30">
                             <div class="card-body">
-
+                            <?php $countStudent = $this->db->get_where('tbl_student_room',['room_id' => $room['id']])->result_array(); ?>
                                 <div class="media">
                                     <img class="d-flex mr-3 rounded-circle img-thumbnail thumb-lg" src="public/assets/images/room.jpg" alt="Generic placeholder image">
                                     <div class="media-body" style="position:relative;">
@@ -51,6 +51,7 @@
                                                 <div style="justify-content: center;display: flex;align-items: center; font-size:10px; margin: 0 5px;"><i class="fa fa-minus" aria-hidden="true"></i></div>
                                                 <?php echo date('h:i A',strtotime($room['end_time'])); ?>
                                             </div>
+                                            <div class="font-16">จำนวนนักเรียน : <?php echo count($countStudent); ?></div>
                                             <div class="mt-0 font-16 mb-1">ผู้สอน : <?php echo $teacher->title.$teacher->first_name.' '.$teacher->last_name; ?></div>
                                             
                                         <div>

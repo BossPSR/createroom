@@ -448,7 +448,18 @@ class Index_ctr extends CI_Controller
       if (empty($room)) {
         redirect('index');
       }
-
+      $boxWork = $this->db->get_where('tbl_box_home_work',['id' => $this->input->get('id')])->row();
+      $checkDate = strtotime($boxWork->later_than);
+      $dateToday = strtotime(date('Y-m-d H:i:s'));
+      if ($dateToday > $checkDate) {
+        $this->session->set_flashdata('msg','ไม่สามารถลบกล่องส่งการบ้านได้เนื่องจากครบวันที่กำหนดส่งแล้ว !!');
+        if ($this->input->get('type') == "teacher") {
+          redirect('box_homework?id=' . $this->input->get('room_id') . '&type=teacher');
+        } else {
+          redirect('box_homework?id=' . $this->input->get('room_id'));
+        }
+      }
+    
       $this->db->where('id', $this->input->get('id'));
       $success = $this->db->delete('tbl_box_home_work');
 

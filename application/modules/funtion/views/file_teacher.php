@@ -93,7 +93,7 @@
                                                 <div class="col-md-12">
                                                     <div class="p-20">
                                                         <div class="form-group">
-                                                            <label>เพิ่มเอกสารประกอบการเรียน (Add Handout) <span style="color:red;">*</span></label>
+                                                            <label>เพิ่มเอกสารประกอบการเรียน (Add Handout) <span style="color:red;">** ขนาดไม่เกิน 200 MB **</span></label>
                                                             <input type="file" placeholder="" class="form-control" name="file_name"  required>
                                                         </div>
                                                     </div>
